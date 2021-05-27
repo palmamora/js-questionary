@@ -336,11 +336,12 @@ const nextQuestion = () => {
   if (pregunta === 12) {
     show(3);
     cargarTabla();
-    document.getElementById('tablaCompleta').style = 'display:block';
+    document.getElementById("tablaCompleta").style = "display:block";
     return false;
   }
-  if (pregunta != 1) {
+  if (pregunta !== 1) {
     document.getElementById("btnPrevQuestion").setAttribute("disabled", "");
+  } else {
   }
 
   cargarPregunta(pregunta);
@@ -395,7 +396,7 @@ const cargarRespuesta = (n) => {
 
 const cargarTabla = () => {
   tabla = document.getElementById("tabla");
-  
+
   tabla.innerHTML = "";
   console.table(respuestas);
   for (let i = 1; i < 12; i++) {
@@ -441,3 +442,34 @@ const show = (n) => {
   }
   document.getElementById(secciones[n]).style = "display:block";
 };
+
+const industrias = ["Telecomunicaciones", "Agroindustria", "Informática"];
+
+const validarEmail = (e) => {
+  if (
+    /[a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,15})/i.test(e)
+  ) {
+    return true;
+  } else {
+    return false;
+  }
+};
+
+const validarDatosIniciales = () => {
+  let email = document.getElementById("email");
+  if (validarEmail(email.value)) {
+    email.classList = "form-control is-valid";
+    return true;
+  } else {
+    email.classList = "form-control is-invalid";
+    return false;
+  } 
+};
+
+const btnDatosIniciales = ()=>{
+  if(!validarDatosIniciales()){
+    document.getElementById('feedback-correo').style = "display: block"
+  }else{
+    startTest();
+  }
+}

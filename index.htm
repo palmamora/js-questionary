@@ -68,32 +68,38 @@
 
             </div>
             <div class="row">
-                <form action="" class="">
-                    <div class="col-9">
+
+                <div class="col-9">
+                    <div class="form-group">
+                        <label for="">Correo electrónico</label>
+                        <input type="email" class="form-control" name="email" id="email"
+                            onchange="validarDatosIniciales()" aria-describedby="emailHelpId"
+                            placeholder="ejemplo@ejemplo.com">
+                    </div>
+                </div>
+                <div class="col-9">
+                    <div class="form-group">
                         <div class="form-group">
-                            <label for="">Correo electrónico</label>
-                            <input type="email" required class="form-control" name="email" id="email"
-                                aria-describedby="emailHelpId" placeholder="ejemplo@ejemplo.com">
+                            <label for="">Industria</label>
+                            <select class="form-control" name="industria" id="industria">
+                                <option>Telecomunicaciones</option>
+                                <option>Informática</option>
+                                <option>Agroindustria</option>
+                            </select>
                         </div>
                     </div>
-                    <div class="col-9">
-                        <div class="form-group">
-                            <div class="form-group">
-                                <label for="">Industria</label>
-                                <select required class="form-control" name="industria" id="industria">
-                                    <option>Telecomunicaciones</option>
-                                    <option>Informática</option>
-                                    <option>Agroindustria</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                </form>
+                </div>
+
             </div>
+
             <div class="row mt-4">
                 <div class="col-6"></div>
-                <div class="col-6"><button type="submit" name="" id="btnContinuar" class="btn btn-outline-warning"
-                        btn-lg btn-block" onclick="startTest();">CONTINUAR</button></div>
+                <div class="col-6">
+                    <button type="button" name="" id="btnContinuar" class="btn btn-outline-warning" btn-lg btn-block"
+                        onclick="btnDatosIniciales();">CONTINUAR</button>
+                        <div id="feedback-correo" style="display: none;" class="invalid-feedback">Por favor, ingrese un correo
+                            válido.</div>
+                </div>
             </div>
         </div>
 
@@ -158,16 +164,11 @@
                 </div>
             </div>
 
-            <div class="row justify-content-end mt-5">
-                <div class="col-6">
-                    <button type="button" onclick="prevQuestion()" name="" id="btnPrevQuestion" class="btn btn-outline-primary" btn-lg
-                        btn-block">Anterior</button>
-                </div>
-                <div class="col-6">
-                    <button type="button" onclick="nextQuestion()" name="" id="btnNextQuestion" class="btn btn-outline-warning" btn-lg
-                        btn-block">Siguiente</button>
-                </div>
-
+            <div class="d-flex justify-content-center m-4">
+                    <button type="button" onclick="prevQuestion()" name="" id="btnPrevQuestion"
+                        class="btn btn-outline-primary m-3" btn-lg btn-block">Anterior</button>
+                    <button type="button" onclick="nextQuestion()" name="" id="btnNextQuestion"
+                        class="btn btn-outline-warning m-3" btn-lg btn-block">Siguiente</button>
             </div>
             <hr>
         </div>
@@ -203,7 +204,8 @@
 
 
 
-    </div><!--FIN DIV CONTAINER-->
+    </div>
+    <!--FIN DIV CONTAINER-->
 
     <!-- Footer -->
     <footer class="page-footer font-small bg-dark fixed-bottom">
@@ -239,7 +241,7 @@
 
 
 
-    <script src="./js/script.js" ></script>
+    <script src="./js/script.js"></script>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
