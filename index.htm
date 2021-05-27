@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Formulario</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://bootswatch.com/5/lux/bootstrap.css" crossorigin="anonymous">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand navbar-light bg-dark"></nav>
+    <div class="container mb-5">
+
+
+
+
+
+        <div class="row mt-4" id="div-inicio">
+            <hr>
+            <h2 class="text-center">PANTALLA DE INICIO</h2>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae tempora porro praesentium, quam eos,
+                assumenda non, aspernatur eius commodi architecto fugiat voluptas cum nisi quae adipisci asperiores
+                obcaecati nulla debitis!
+                Doloremque illum fugiat eligendi quos rerum earum voluptate nisi ex ipsam at itaque quo veniam,
+                reprehenderit ipsa molestiae? Modi quae officiis harum nostrum magnam! Architecto non veniam aut eius
+                odit?</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint quidem quo alias fuga explicabo obcaecati
+                vitae, ratione ea mollitia beatae facere dolores in eius odit quia possimus vero, laboriosam culpa!
+                At ullam architecto necessitatibus, error est voluptate fugiat, provident porro suscipit blanditiis
+                dolorem rem dicta iste cumque incidunt. Minus ratione excepturi, atque provident quod quaerat veritatis
+                laudantium quia saepe totam.</p>
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Asperiores alias earum ullam odit. Fugiat
+                explicabo, ipsum, temporibus sequi corporis possimus neque quod dolor natus aliquam voluptates
+                dignissimos illo veritatis at.
+                Consequuntur doloremque molestiae corporis voluptates optio inventore eaque eius impedit sapiente
+                eveniet asperiores alias eum, quaerat enim? Veritatis minima unde numquam asperiores provident nesciunt
+                illo praesentium, doloribus similique inventore repudiandae.</p>
+            <div class="row justify-content-end mt-4">
+                <div class="col-6"></div>
+                <div class="col-6">
+                    <button type="button" name="" id="" class="btn btn-outline-warning" btn-lg btn-block"
+                        onclick="show(1)">CONTINUAR</button>
+                </div>
+            </div>
+
+        </div>
+
+
+
+
+
+        <div class="row mt-4" id="div-datos-iniciales" style="display: none;">
+            <div class="row m-4">
+                <div class="btn-group" role="group" aria-label="Basic example">
+                    <button type="button" class="btn btn-warning" disabled>1.-Datos Iniciales</button>
+                    <button type="button" class="btn btn-secondary" disabled>2.-Gestión de Riesgos</button>
+                    <button type="button" class="btn btn-secondary" disabled>3.-Resultados Finales</button>
+                </div>
+            </div>
+            <div class="row">
+                <h2 id="">DATOS INICIALES</h2>
+                <p id="">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repudiandae quasi sapiente a
+                    alias</p>
+
+            </div>
+            <div class="row">
+                <form action="" class="">
+                    <div class="col-9">
+                        <div class="form-group">
+                            <label for="">Correo electrónico</label>
+                            <input type="email" required class="form-control" name="email" id="email"
+                                aria-describedby="emailHelpId" placeholder="ejemplo@ejemplo.com">
+                        </div>
+                    </div>
+                    <div class="col-9">
+                        <div class="form-group">
+                            <div class="form-group">
+                                <label for="">Industria</label>
+                                <select required class="form-control" name="industria" id="industria">
+                                    <option>Telecomunicaciones</option>
+                                    <option>Informática</option>
+                                    <option>Agroindustria</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="row mt-4">
+                <div class="col-6"></div>
+                <div class="col-6"><button type="submit" name="" id="btnContinuar" class="btn btn-outline-warning"
+                        btn-lg btn-block" onclick="startTest();">CONTINUAR</button></div>
+            </div>
+        </div>
+
+
+
+
+
+        <div class="row" id="div-preguntas" style="display: none;">
+            <hr>
+            <div class="row m-4">
+                <div class="btn-group" role="group" aria-label="Basic example">
+                    <button type="button" class="btn btn-secondary" disabled>1.-Datos Iniciales</button>
+                    <button type="button" class="btn btn-warning" disabled>2.-Gestión de Riesgos</button>
+                    <button type="button" class="btn btn-secondary" disabled>3.-Resultados</button>
+                </div>
+            </div>
+            <div class="row">
+                <h2 class="text-center">Gestión de Riesgos</h2>
+                <h3 id="pilar">Titulo Pregunta</h2>
+                    <p id="riesgo">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repudiandae quasi sapiente
+                        a
+                        alias
+                        praesentium asperiores placeat voluptas sequi distinctio, ipsa, impedit ex nostrum, veritatis
+                        illum
+                        debitis magni. Minima, ipsum placeat.</p>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        <label for="">Impacto</label>
+                        <select class="form-select" id="impacto" onchange="calcularRiesgo()">
+                            <option selected value="0">-</option>
+                            <option value="1">Leve</option>
+                            <option value="2">Moderado</option>
+                            <option value="3">Catastrófico</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="form-group">
+                        <label for="">Probabilidad</label>
+                        <select class="form-select" id="probabilidad" onchange="calcularRiesgo()">
+                            <option selected value="0">-</option>
+                            <option value="1">Improbable</option>
+                            <option value="2">Posible</option>
+                            <option value="3">Probable</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label for="">Riesgo Residual</label>
+                        <select class="form-select" id="riesgo_res" disabled>
+                            <option selected value="0">-</option>
+                            <option value="1">Bajo</option>
+                            <option value="2">Medio</option>
+                            <option value="3">Alto</option>
+                            <option value="4">Crítico</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row justify-content-end mt-5">
+                <div class="col-6">
+                    <button type="button" onclick="prevQuestion()" name="" id="btnPrevQuestion" class="btn btn-outline-primary" btn-lg
+                        btn-block">Anterior</button>
+                </div>
+                <div class="col-6">
+                    <button type="button" onclick="nextQuestion()" name="" id="btnNextQuestion" class="btn btn-outline-warning" btn-lg
+                        btn-block">Siguiente</button>
+                </div>
+
+            </div>
+            <hr>
+        </div>
+
+
+
+
+
+        <div class="row mt-4" id="div-resultados" style="display: none;">
+            <div class="row">
+                <div class="row m-4">
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                        <button type="button" class="btn btn-secondary" disabled>1.-Datos Iniciales</button>
+                        <button type="button" class="btn btn-secondary" disabled>2.-Gestión de Riesgos</button>
+                        <button type="button" class="btn btn-warning" disabled>3.-Resultados Finales</button>
+                    </div>
+                </div>
+                <h2 id="">RESULTADOS FINALES</h2>
+                <p id="">Existen las siguientes opciones:</p>
+                <p>- Generar informe de riesgos: genera un documento de base con el resultado del análisis realizado</p>
+            </div>
+            <div class="row">
+                <div class="col-6"></div>
+                <div class="col-6">
+                    <button type="button" name="" id="" class="btn btn-success"
+                        onclick="tableToExcel('tabla', 'W3C Example Table')" btn-lg btn-block">GENERAR
+                        RESULTADOS (.xls)</button>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+    </div><!--FIN DIV CONTAINER-->
+
+    <!-- Footer -->
+    <footer class="page-footer font-small bg-dark fixed-bottom">
+
+        <!-- Copyright -->
+        <div class="footer-copyright text-center py-3">© 2021 Copyright:
+            <a href="https://asesoriapdp.wordpress.com/"> Capstone</a>
+        </div>
+        <!-- Copyright -->
+
+    </footer>
+    <!-- Footer -->
+
+    <div style="display: none;" id="tablaCompleta" class="container p-5">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th colspan="4">Resultados</th>
+                </tr>
+                <tr>
+                    <th>Pilar</th>
+                    <th>Riesgo</th>
+                    <th>Impacto</th>
+                    <th>Probabilidad</th>
+                    <th>Riesgo</th>
+                </tr>
+            </thead>
+            <tbody id="tabla">
+            </tbody>
+        </table>
+    </div>
+
+
+
+
+    <script src="./js/script.js" ></script>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src=" https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
