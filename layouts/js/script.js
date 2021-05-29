@@ -23,7 +23,6 @@ const eliminarIndustria = (id) => {
   let http = new XMLHttpRequest();
   let url = "http://localhost/formulario/api.php";
   http.open("DELETE", url);
-  let formData = new FormData();
   http.send(id);
   http.onreadystatechange = (e) => {
     let data = JSON.stringify(http.responseText);
@@ -31,3 +30,21 @@ const eliminarIndustria = (id) => {
   };
   refrescarTabla();
 };
+
+const addIndustria = () => {
+  let http = new XMLHttpRequest();
+  let url = "http://localhost/formulario/api.php";
+  http.open("POST", url);
+
+  let industria = window.prompt("Ingrese el nombre: ");
+  console.log(industria);
+
+  http.send(industria);
+  http.onreadystatechange = (e) => {
+    let data = JSON.stringify(http.responseText);
+    console.log(data);
+    refrescarTabla();
+  };
+};
+
+refrescarTabla();

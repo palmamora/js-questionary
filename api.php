@@ -20,12 +20,21 @@ switch ($method) {
             echo json_encode($o);*/
             break;
         }
-    case 'DELETE': { 
-            
+    case 'DELETE': {
+
             header('HTTP/1.0 200 OK');
             header('Content-Type: application/json');
-            $id = file_get_contents('php://input',true);
+            $id = file_get_contents('php://input', true);
             $link->query("DELETE FROM industrias WHERE id=$id;");
+            echo json_encode('success');
+            break;
+        }
+
+    case 'POST': {
+            header('HTTP/1.0 200 OK');
+            header('Content-Type: application/json');
+            $nombre = file_get_contents('php://input', true);
+            $link->query("INSERT INTO industrias(nombre) VALUES('$nombre');");
             echo json_encode('success');
             break;
         }
