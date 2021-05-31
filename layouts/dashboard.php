@@ -30,6 +30,46 @@
         </table>
     </div>
 
+    <div class="container">
+        <h4>Pilares</h4>
+        <input name="" id="" onclick="refrescarTabla2()" class="btn btn-primary" type="button" value="Refrescar">
+        <input name="" id="" onclick="addPilar()" class="btn btn-success" type="button" value="Añadir">
+        <table class="table table-striped table-inverse table-responsive">
+            <thead class="thead-inverse">
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody id="tabla-pilars">
+
+            </tbody>
+        </table>
+    </div>
+
+    <div class="container">
+        <h4>Preguntas</h4>
+        <input name="" id="" onclick="refrescarTabla3()" class="btn btn-primary" type="button" value="Refrescar">
+        <input name="" id="" onclick="addPilar()" class="btn btn-success" type="button" value="Añadir">
+        <table class="table table-striped table-inverse table-responsive">
+            <thead class="thead-inverse">
+                <tr>
+                    <th>ID</th>
+                    <th>Pilar</th>
+                    <th>Riesgo</th>
+                    <th>Impacto Leve</th>
+                    <th>Impacto Moderado</th>
+                    <th>ImpactoGrave</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody id="tabla-questions">
+
+            </tbody>
+        </table>
+    </div>
+
 
 
 

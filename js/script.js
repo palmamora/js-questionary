@@ -328,6 +328,7 @@ const startTest = () => {
   }
   cargarPregunta(1);
   cargarRespuesta(1);
+  setProgreso(0);
 };
 
 const nextQuestion = () => {
@@ -346,6 +347,7 @@ const nextQuestion = () => {
 
   cargarPregunta(pregunta);
   cargarRespuesta(pregunta);
+  setProgreso(Math.floor(pregunta*100/12));
 };
 
 const prevQuestion = () => {
@@ -353,6 +355,7 @@ const prevQuestion = () => {
 
   cargarPregunta(pregunta);
   cargarRespuesta(pregunta);
+  setProgreso(Math.floor(pregunta*100/12));
 };
 
 const limpiarRespuesta = () => {
@@ -463,13 +466,39 @@ const validarDatosIniciales = () => {
   } else {
     email.classList = "form-control is-invalid";
     return false;
-  } 
+  }
 };
 
-const btnDatosIniciales = ()=>{
-  if(!validarDatosIniciales()){
-    document.getElementById('feedback-correo').style = "display: block"
-  }else{
+const btnDatosIniciales = () => {
+  if (!validarDatosIniciales()) {
+    document.getElementById("feedback-correo").style = "display: block";
+  } else {
     startTest();
   }
+};
+
+const cargarIndustrias = () => {
+  let http = new XMLHttpRequest();
+  let url = "http://localhost/formulario/api.php";
+  http.open("GET", url);
+  http.send();
+  http.onreadystatechange = (e) => {
+    let data = JSON.parse(http.responseText);
+    console.log(data);
+    let tabla = document.getElementById("select-industrias");
+    tabla.innerHTML = "";
+    for (const key in data) {
+      const element = data[key];
+      tabla.innerHTML += `<option>${element.nombre}</option>`;
+    }
+  };
+};
+
+cargarIndustrias();
+
+
+const setProgreso = (n)=>{
+  let barra = document.getElementById('barra-progreso');
+  barra.style = `width: ${n}%`;
+  barra.ariaValueNow = n;
 }
