@@ -360,7 +360,7 @@ const startTest = () => {
   }
   cargarPregunta(0);
   cargarRespuesta(0);
-  setProgreso(0);
+  setProgreso(0,pregunta);
 };
 
 const nextQuestion = () => {
@@ -379,7 +379,7 @@ const nextQuestion = () => {
 
   cargarPregunta(pregunta);
   cargarRespuesta(pregunta);
-  setProgreso(Math.floor(pregunta*100/12));
+  setProgreso(Math.floor(pregunta*100/12), pregunta);
 };
 
 const prevQuestion = () => {
@@ -387,7 +387,7 @@ const prevQuestion = () => {
 
   cargarPregunta(pregunta);
   cargarRespuesta(pregunta);
-  setProgreso(Math.floor(pregunta*100/12));
+  setProgreso(Math.floor(pregunta*100/12)),pregunta;
 };
 
 const limpiarRespuesta = () => {
@@ -528,9 +528,11 @@ const cargarIndustrias = () => {
 cargarIndustrias();
 
 
-const setProgreso = (n)=>{
+const setProgreso = (n,p)=>{
   let barra = document.getElementById('barra-progreso');
   barra.style = `width: ${n}%`;
   barra.ariaValueNow = n;
+  let span_progreso = document.getElementById('span-progreso');
+  span_progreso.innerHTML = `Pregunta ${p+1} de ${preguntas_.length}`
 }
 
