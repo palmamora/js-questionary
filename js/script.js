@@ -319,22 +319,54 @@ const calcularRiesgo = () => {
   actualizarColorSelect();
 };
 
-let pregunta = 1;
+const preguntas_ = [{}];
+const respuestas_ = [{}];
+
+const getRespuestas = ()=>{
+  for(let i=0; i<preguntas_.length; i++){
+    respuestas_[i].impacto = 0;
+    respuestas_[i].probabilidad = 0;
+    respuestas_[i].riesgo_res = 0;
+
+  }
+}
+
+
+const getPreguntas =()=>{
+  let http = new XMLHttpRequest();
+  let url = "http://localhost/formulario/api.php?data=questions&action=get";
+  http.open("GET", url);
+  http.send();
+  http.onreadystatechange = (e) => {
+    let data = JSON.parse(http.responseText);
+    for (const key in data) {
+      const element = data[key];
+      console.log(element);
+      preguntas_[key] = element;
+    }
+  };
+}
+
+getPreguntas();
+getRespuestas();
+
+var pregunta = 0 ;
+
 
 const startTest = () => {
   show(2);
   if (pregunta === 1) {
     document.getElementById("btnPrevQuestion").setAttribute("disabled", "true");
   }
-  cargarPregunta(1);
-  cargarRespuesta(1);
+  cargarPregunta(0);
+  cargarRespuesta(0);
   setProgreso(0);
 };
 
 const nextQuestion = () => {
   guardarRespuesta(pregunta);
   pregunta++;
-  if (pregunta === 12) {
+  if (pregunta === preguntas_.length) {
     show(3);
     cargarTabla();
     document.getElementById("tablaCompleta").style = "display:block";
@@ -369,11 +401,11 @@ const limpiarRespuesta = () => {
 
 const cargarPregunta = (n) => {
   let pilar = document.getElementById("pilar");
-  pilar.innerHTML = preguntas[n].pilar;
+  pilar.innerHTML = preguntas_[n]['pilar'];
   let riesgo = document.getElementById("riesgo");
-  riesgo.innerHTML = preguntas[n].riesgo;
-  console.log(preguntas[n].riesgo);
+  riesgo.innerHTML = preguntas_[n]['riesgo'];
 };
+
 
 const guardarRespuesta = (n) => {
   let imp_ = document.getElementById("impacto");
@@ -382,33 +414,32 @@ const guardarRespuesta = (n) => {
   let pro = pro_.selectedIndex;
   let rie_ = document.getElementById("riesgo_res");
   let rie = rie_.selectedIndex;
-  respuestas[n].impacto = imp;
-  respuestas[n].probabilidad = pro;
-  respuestas[n].riesgo_res = rie;
-  console.log(respuestas[n]);
+  respuestas_[n].impacto = imp;
+  respuestas_[n].probabilidad = pro;
+  respuestas_[n].riesgo_res = rie;
+  console.log(respuestas_[n]);
 };
 
 const cargarRespuesta = (n) => {
   let imp_ = document.getElementById("impacto");
-  imp_.selectedIndex = respuestas[n].impacto;
+  imp_.selectedIndex = respuestas_[n].impacto;
   let pro_ = document.getElementById("probabilidad");
-  pro_.selectedIndex = respuestas[n].probabilidad;
+  pro_.selectedIndex = respuestas_[n].probabilidad;
   let rie_ = document.getElementById("riesgo_res");
-  rie_.selectedIndex = respuestas[n].riesgo_res;
+  rie_.selectedIndex = respuestas_[n].riesgo_res;
 };
 
 const cargarTabla = () => {
   tabla = document.getElementById("tabla");
-
   tabla.innerHTML = "";
-  console.table(respuestas);
-  for (let i = 1; i < 12; i++) {
+  console.table(respuestas_);
+  for (let i = 0; i < preguntas_.length; i++) {
     tabla.innerHTML += `<tr class="table-warning">
-    <td>${preguntas[i].pilar}</td>
-    <td>${preguntas[i].riesgo}</td>
-    <td>${respuestas[i].impacto}</td>
-    <td>${respuestas[i].probabilidad}</td>
-    <td>${respuestas[i].riesgo_res}</td>
+    <td>${preguntas_[i].pilar}</td>
+    <td>${preguntas_[i].riesgo}</td>
+    <td>${respuestas_[i].impacto}</td>
+    <td>${respuestas_[i].probabilidad}</td>
+    <td>${respuestas_[i].riesgo_res}</td>
     </tr>`;
   }
 };
@@ -479,7 +510,7 @@ const btnDatosIniciales = () => {
 
 const cargarIndustrias = () => {
   let http = new XMLHttpRequest();
-  let url = "http://localhost/formulario/api.php";
+  let url = "http://localhost/formulario/api.php?data=industrias&action=get";
   http.open("GET", url);
   http.send();
   http.onreadystatechange = (e) => {
@@ -502,3 +533,4 @@ const setProgreso = (n)=>{
   barra.style = `width: ${n}%`;
   barra.ariaValueNow = n;
 }
+
