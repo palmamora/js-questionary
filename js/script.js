@@ -20,13 +20,9 @@ const getPreguntas = () => {
       preguntas_[key] = element;
     }
   };
-  
 };
 
-
 getPreguntas();
-
-
 
 const actualizarColorSelect = (n) => {
   let rie_ = document.getElementById("riesgo_res");
@@ -43,7 +39,6 @@ const actualizarColorSelect = (n) => {
     rie_.style.backgroundColor = "#f7f7f9";
   }
 };
-
 
 const calcularRiesgo = () => {
   let imp_ = document.getElementById("impacto");
@@ -86,21 +81,21 @@ const startTest = () => {
   cargarRespuesta(pregunta);
   actualizarColorSelect();
   setProgreso(0, pregunta);
+  if (pregunta == 0) {
+    document.getElementById("btnPrevQuestion").classList.add("disabled");
+  }
 };
 
 const nextQuestion = () => {
   if (verificarRespuesta()) {
     guardarRespuesta(pregunta);
     pregunta++;
-    if (pregunta === preguntas_.length ) {
+    document.getElementById("feedback-pregunta").style = "display: none";
+    if (pregunta === preguntas_.length) {
       show(3);
       cargarTabla();
       document.getElementById("tablaCompleta").style = "display:block";
       return false;
-    }
-    if (pregunta == 0) {
-      document.getElementById("btnPrevQuestion").setAttribute("disabled", "");
-    } else {
     }
 
     cargarPregunta(pregunta);
@@ -108,6 +103,11 @@ const nextQuestion = () => {
     actualizarColorSelect();
     setProgreso(Math.floor((pregunta * 100) / preguntas_.length));
     setPregunta(pregunta);
+    if (pregunta !== 0) {
+      document.getElementById("btnPrevQuestion").classList.remove("disabled");
+    }else{
+      document.getElementById("btnPrevQuestion").classList.add("disabled");
+    }
   }
 };
 
@@ -119,6 +119,12 @@ const prevQuestion = () => {
   actualizarColorSelect();
   setProgreso(Math.floor((pregunta * 100) / preguntas_.length));
   setPregunta(pregunta);
+  if (pregunta !== 0) {
+    document.getElementById("btnPrevQuestion").classList.remove("disabled");
+  }else{
+    document.getElementById("btnPrevQuestion").classList.add("disabled");
+  }
+  document.getElementById("feedback-pregunta").style = "display: none";
 };
 
 const limpiarRespuesta = () => {
@@ -204,8 +210,6 @@ const show = (n) => {
   }
   document.getElementById(secciones[n]).style = "display:block";
 };
-
-const industrias = ["Telecomunicaciones", "Agroindustria", "Informática"];
 
 const validarEmail = (e) => {
   if (
