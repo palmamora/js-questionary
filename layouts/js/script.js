@@ -1,6 +1,8 @@
+const host = "http://localhost/"
+
 const refrescarTablaIndustrias = () => {
   let http = new XMLHttpRequest();
-  let url = "http://localhost/formulario/api.php?data=industrias&action=get";
+  let url = `${host}formulario/api.php?data=industrias&action=get`;
   http.open("GET", url);
   http.send();
   http.onreadystatechange = (e) => {
@@ -21,7 +23,7 @@ const refrescarTablaIndustrias = () => {
 
 const refrescarTablaPilares = () => {
   let http = new XMLHttpRequest();
-  let url = "http://localhost/formulario/api.php?data=pilars&action=get";
+  let url = `${host}formulario/api.php?data=pilars&action=get`;
   http.open("GET", url);
   http.send();
   http.onreadystatechange = (e) => {
@@ -42,7 +44,7 @@ const refrescarTablaPilares = () => {
 
 const refrescarTablaPreguntas = () => {
   let http = new XMLHttpRequest();
-  let url = "http://localhost/formulario/api.php?data=questions&action=get";
+  let url = `${host}formulario/api.php?data=questions&action=get`;
   http.open("GET", url);
   http.send();
   http.onreadystatechange = (e) => {
@@ -67,7 +69,7 @@ const refrescarTablaPreguntas = () => {
 
 const eliminarIndustria = (id) => {
   let http = new XMLHttpRequest();
-  let url = `http://localhost/formulario/api.php?data=industrias&action=delete&id=${id}`;
+  let url = `${host}formulario/api.php?data=industrias&action=delete&id=${id}`;
   http.open("GET", url);
   http.send();
   http.onreadystatechange = (e) => {
@@ -79,7 +81,7 @@ const eliminarIndustria = (id) => {
 
 const eliminarPilar = (id) => {
   let http = new XMLHttpRequest();
-  let url = `http://localhost/formulario/api.php?data=pilars&action=delete&id=${id}`;
+  let url = `${host}formulario/api.php?data=pilars&action=delete&id=${id}`;
   http.open("GET", url);
   http.send();
   http.onreadystatechange = (e) => {
@@ -91,7 +93,7 @@ const eliminarPilar = (id) => {
 
 const eliminarPregunta = (id) => {
   let http = new XMLHttpRequest();
-  let url = `http://localhost/formulario/api.php?data=questions&action=delete&id=${id}`;
+  let url = `${host}formulario/api.php?data=questions&action=delete&id=${id}`;
   http.open("GET", url);
   http.send();
   http.onreadystatechange = (e) => {
@@ -104,7 +106,7 @@ const eliminarPregunta = (id) => {
 const addIndustria = () => {
   let industria = window.prompt("Ingrese el nombre: ");
   let http = new XMLHttpRequest();
-  let url = `http://localhost/formulario/api.php?data=industrias&action=post&nombre=${industria}`;
+  let url = `${host}formulario/api.php?data=industrias&action=post&nombre=${industria}`;
   http.open("GET", url);
   http.send();
   http.onreadystatechange = (e) => {
@@ -117,7 +119,7 @@ const addIndustria = () => {
 const addPilar = () => {
   let pilar = window.prompt("Ingrese el nombre: ");
   let http = new XMLHttpRequest();
-  let url = `http://localhost/formulario/api.php?data=pilars&action=post&nombre=${pilar}`;
+  let url = `${host}formulario/api.php?data=pilars&action=post&nombre=${pilar}`;
   http.open("GET", url);
   http.send();
   http.onreadystatechange = (e) => {

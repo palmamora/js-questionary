@@ -126,6 +126,13 @@
                         illum
                         debitis magni. Minima, ipsum placeat.</p>
             </div>
+            <div class="">
+                <button id="btn-helper" class="btn btn-success btn-sm" data-toggle="collapse" data-target="#helper"><img src="./img/information.png" alt="" height="20px" width="20px"> Más información</button>
+                
+                <div id="helper" class="collapse">
+                    
+                </div>
+            </div>
             <div class="row">
                 <div class="col">
                     <div class="form-group">
@@ -163,19 +170,21 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="d-flex justify-content-center m-4">
                 <button type="button" onclick="prevQuestion()" name="" id="btnPrevQuestion"
                     class="btn btn-outline-primary m-3">Anterior</button>
                 <button type="button" onclick="nextQuestion()" name="" id="btnNextQuestion"
                     class="btn btn-outline-warning m-3">Siguiente</button>
-                    <div id="feedback-pregunta" style="display: none;" class="invalid-feedback">Por favor, marque una u otra opción.</div>
+                <div id="feedback-pregunta" style="display: none;" class="invalid-feedback">Por favor, marque una u otra
+                    opción.</div>
             </div>
             <div class="d-flex justify-content-center m-4">
-            <span id="span-progreso">Progreso</span>
-            <div class="progress">
-                <div id="barra-progreso" class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-              </div>
+                <span id="span-progreso">Progreso</span>
+                <div class="progress">
+                    <div id="barra-progreso" class="progress-bar progress-bar-striped bg-info" role="progressbar"
+                        style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
             </div>
             <hr>
         </div>

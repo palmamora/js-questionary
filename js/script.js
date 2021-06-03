@@ -1,5 +1,6 @@
 const preguntas_ = [];
 const respuestas_ = [];
+const host = 'http://localhost/'
 
 const getRespuestas = () => {
   for (let i = 0; i < preguntas_.length; i++) {
@@ -10,7 +11,7 @@ const getRespuestas = () => {
 
 const getPreguntas = () => {
   let http = new XMLHttpRequest();
-  let url = "http://localhost/formulario/api.php?data=questions&action=get";
+  let url = `${host}formulario/api.php?data=questions&action=get`;
   http.open("GET", url);
   http.send();
   http.onreadystatechange = (e) => {
@@ -79,6 +80,7 @@ const startTest = () => {
   show(2);
   cargarPregunta(pregunta);
   cargarRespuesta(pregunta);
+  cargarInformacion(pregunta);
   actualizarColorSelect();
   setProgreso(0, pregunta);
   if (pregunta == 0) {
@@ -100,6 +102,7 @@ const nextQuestion = () => {
 
     cargarPregunta(pregunta);
     cargarRespuesta(pregunta);
+    cargarInformacion(pregunta);
     actualizarColorSelect();
     setProgreso(Math.floor((pregunta * 100) / preguntas_.length));
     setPregunta(pregunta);
@@ -116,6 +119,7 @@ const prevQuestion = () => {
 
   cargarPregunta(pregunta);
   cargarRespuesta(pregunta);
+  cargarInformacion(pregunta);
   actualizarColorSelect();
   setProgreso(Math.floor((pregunta * 100) / preguntas_.length));
   setPregunta(pregunta);
@@ -242,7 +246,7 @@ const btnDatosIniciales = () => {
 
 const cargarIndustrias = () => {
   let http = new XMLHttpRequest();
-  let url = "http://localhost/formulario/api.php?data=industrias&action=get";
+  let url = `${host}formulario/api.php?data=industrias&action=get`;
   http.open("GET", url);
   http.send();
   http.onreadystatechange = (e) => {
@@ -280,3 +284,15 @@ const verificarRespuesta = () => {
     return true;
   }
 };
+
+const cargarInformacion = (n) => {
+  let info = document.getElementById('helper');
+  info.innerHTML = `Impacto:<br>
+                    -Leve: ${preguntas_[n].impactoleve}<br>
+                    -Moderado: ${preguntas_[n].impactomoderado}<br>
+                    -Catastrófico: ${preguntas_[n].impactograve}<br>
+                    Probabilidad:<br>
+                    -Improbable: ${preguntas_[n].probimpr}
+                    -Posible: ${preguntas_[n].probposi}
+                    -Probable: ${preguntas_[n].probprob}`
+}
