@@ -44,7 +44,7 @@
                 <div class="col-6"></div>
                 <div class="col-6">
                     <button type="button" name="" id="" class="btn btn-outline-warning"
-                        onclick="show(1)">CONTINUAR</button>
+                        onclick="show(1);">CONTINUAR</button>
                 </div>
             </div>
 
@@ -73,7 +73,7 @@
                     <div class="form-group">
                         <label for="">Correo electrónico</label>
                         <input type="email" class="form-control" name="email" id="email"
-                            onchange="validarDatosIniciales()" aria-describedby="emailHelpId"
+                            onchange="validarDatosIniciales();getRespuestas();" aria-describedby="emailHelpId"
                             placeholder="ejemplo@ejemplo.com">
                     </div>
                 </div>
@@ -169,6 +169,7 @@
                     class="btn btn-outline-primary m-3">Anterior</button>
                 <button type="button" onclick="nextQuestion()" name="" id="btnNextQuestion"
                     class="btn btn-outline-warning m-3">Siguiente</button>
+                    <div id="feedback-pregunta" style="display: none;" class="invalid-feedback">Por favor, marque una u otra opción.</div>
             </div>
             <div class="d-flex justify-content-center m-4">
             <span id="span-progreso">Progreso</span>

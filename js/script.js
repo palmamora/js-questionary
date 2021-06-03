@@ -1,274 +1,32 @@
-const preguntas = {
-  1: {
-    pilar: "Confidencialidad",
-    riesgo: "Acceso no autorizado a los datos personales",
-    impacto: {
-      Leve: "Casi nulo, o efectos menores en la organización. No se evidencia desmedro en la confidencialidad, integridad y disponibilidad de la información.",
-      Moderado:
-        "Efecto manejable, sin mayor afectación en la organización. Se evidencia afectación leve en la confidencialidad, integridad y/o disponibilidad de la información que puede ser manejada.",
-      Catastrófico:
-        "Efecto irreversible en la organización. Se evidencia afectación irreversible en la confidencialidad, integridad y/o disponibilidad de la información.",
-    },
-    Probabilidad: {
-      Improbable:
-        "Poca frecuencia de materialización o se presume que no llegará a materializarse.",
-      Posible:
-        "Materialización ocasional o se presume que eventualmente podría materializarse.",
-      Probable:
-        "Materialización frecuente o se presume que llegará a materializarse.",
-    },
-  },
-  2: {
-    pilar: "Confidencialidad",
-    riesgo: "Fuga de Información",
-    impacto: {
-      Leve: "Casi nulo, o efectos menores en la organización. No se evidencia desmedro en la confidencialidad, integridad y disponibilidad de la información.",
-      Moderado:
-        "Efecto manejable, sin mayor afectación en la organización. Se evidencia afectación leve en la confidencialidad, integridad y/o disponibilidad de la información que puede ser manejada.",
-      Catastrófico:
-        "Efecto irreversible en la organización. Se evidencia afectación irreversible en la confidencialidad, integridad y/o disponibilidad de la información.",
-    },
-    Probabilidad: {
-      Improbable:
-        "Poca frecuencia de materialización o se presume que no llegará a materializarse.",
-      Posible:
-        "Materialización ocasional o se presume que eventualmente podría materializarse.",
-      Probable:
-        "Materialización frecuente o se presume que llegará a materializarse.",
-    },
-  },
-  3: {
-    pilar: "Integridad",
-    riesgo: "Modificación o alteración de datos personales no intencionada",
-    impacto: {
-      Leve: "Casi nulo, o efectos menores en la organización. No se evidencia desmedro en la confidencialidad, integridad y disponibilidad de la información.",
-      Moderado:
-        "Efecto manejable, sin mayor afectación en la organización. Se evidencia afectación leve en la confidencialidad, integridad y/o disponibilidad de la información que puede ser manejada.",
-      Catastrófico:
-        "Efecto irreversible en la organización. Se evidencia afectación irreversible en la confidencialidad, integridad y/o disponibilidad de la información.",
-    },
-    Probabilidad: {
-      Improbable:
-        "Poca frecuencia de materialización o se presume que no llegará a materializarse.",
-      Posible:
-        "Materialización ocasional o se presume que eventualmente podría materializarse.",
-      Probable:
-        "Materialización frecuente o se presume que llegará a materializarse.",
-    },
-  },
-  4: {
-    pilar: "Integridad",
-    riesgo: "Pérdida o borrado no intencionado de datos personales",
-    impacto: {
-      Leve: "Casi nulo, o efectos menores en la organización. No se evidencia desmedro en la confidencialidad, integridad y disponibilidad de la información.",
-      Moderado:
-        "Efecto manejable, sin mayor afectación en la organización. Se evidencia afectación leve en la confidencialidad, integridad y/o disponibilidad de la información que puede ser manejada.",
-      Catastrófico:
-        "Efecto irreversible en la organización. Se evidencia afectación irreversible en la confidencialidad, integridad y/o disponibilidad de la información.",
-    },
-    Probabilidad: {
-      Improbable:
-        "Poca frecuencia de materialización o se presume que no llegará a materializarse.",
-      Posible:
-        "Materialización ocasional o se presume que eventualmente podría materializarse.",
-      Probable:
-        "Materialización frecuente o se presume que llegará a materializarse.",
-    },
-  },
-  5: {
-    pilar: "Disponibilidad",
-    riesgo: "Falta de procesos para el ejercicio de derechos (del titular)",
-    impacto: {
-      Leve: "No hay multas o sanciones asociadas. No se evidencia incumplimiento.",
-      Moderado:
-        "Pueden existir multas o sanciones menores. Se evidencia incumplimiento en algunos aspectos legales.",
-      Catastrófico:
-        "Multas o sanciones inminentes. Incumplimiento legislativo evidente.",
-    },
-    Probabilidad: {
-      Improbable:
-        "Poca frecuencia de materialización o se presume que no llegará a materializarse.",
-      Posible:
-        "Materialización ocasional o se presume que eventualmente podría materializarse.",
-      Probable:
-        "Materialización frecuente o se presume que llegará a materializarse.",
-    },
-  },
-  6: {
-    pilar: "Cumplimiento",
-    riesgo: "Recolección inadecuada de datos personales",
-    impacto: {
-      Leve: "No hay multas o sanciones asociadas. No se evidencia incumplimiento.",
-      Moderado:
-        "Pueden existir multas o sanciones menores. Se evidencia incumplimiento en algunos aspectos legales.",
-      Catastrófico:
-        "Multas o sanciones inminentes. Incumplimiento legislativo evidente.",
-    },
-    Probabilidad: {
-      Improbable:
-        "Poca frecuencia de materialización o se presume que no llegará a materializarse.",
-      Posible:
-        "Materialización ocasional o se presume que eventualmente podría materializarse.",
-      Probable:
-        "Materialización frecuente o se presume que llegará a materializarse.",
-    },
-  },
-  7: {
-    pilar: "Cumplimiento",
-    riesgo: "Uso de fuentes de datos no legítimas",
-    impacto: {
-      Leve: "No hay multas o sanciones asociadas. No se evidencia incumplimiento.",
-      Moderado:
-        "Pueden existir multas o sanciones menores. Se evidencia incumplimiento en algunos aspectos legales.",
-      Catastrófico:
-        "Multas o sanciones inminentes. Incumplimiento legislativo evidente.",
-    },
-    Probabilidad: {
-      Improbable:
-        "Poca frecuencia de materialización o se presume que no llegará a materializarse.",
-      Posible:
-        "Materialización ocasional o se presume que eventualmente podría materializarse.",
-      Probable:
-        "Materialización frecuente o se presume que llegará a materializarse.",
-    },
-  },
-  8: {
-    pilar: "Cumplimiento",
-    riesgo: "Almacenamiento inadecuado de datos personales",
-    impacto: {
-      Leve: "No hay multas o sanciones asociadas. No se evidencia incumplimiento.",
-      Moderado:
-        "Pueden existir multas o sanciones menores. Se evidencia incumplimiento en algunos aspectos legales.",
-      Catastrófico:
-        "Multas o sanciones inminentes. Incumplimiento legislativo evidente.",
-    },
-    Probabilidad: {
-      Improbable:
-        "Poca frecuencia de materialización o se presume que no llegará a materializarse.",
-      Posible:
-        "Materialización ocasional o se presume que eventualmente podría materializarse.",
-      Probable:
-        "Materialización frecuente o se presume que llegará a materializarse.",
-    },
-  },
-  9: {
-    pilar: "Cumplimiento",
-    riesgo: "Uso/Tratamiento inadecuado de datos personales",
-    impacto: {
-      Leve: "No hay multas o sanciones asociadas. No se evidencia incumplimiento.",
-      Moderado:
-        "Pueden existir multas o sanciones menores. Se evidencia incumplimiento en algunos aspectos legales.",
-      Catastrófico:
-        "Multas o sanciones inminentes. Incumplimiento legislativo evidente.",
-    },
-    Probabilidad: {
-      Improbable:
-        "Poca frecuencia de materialización o se presume que no llegará a materializarse.",
-      Posible:
-        "Materialización ocasional o se presume que eventualmente podría materializarse.",
-      Probable:
-        "Materialización frecuente o se presume que llegará a materializarse.",
-    },
-  },
-  10: {
-    pilar: "Cumplimiento",
-    riesgo: "Cesión inadecuada de datos personales",
-    impacto: {
-      Leve: "No hay multas o sanciones asociadas. No se evidencia incumplimiento.",
-      Moderado:
-        "Pueden existir multas o sanciones menores. Se evidencia incumplimiento en algunos aspectos legales.",
-      Catastrófico:
-        "Multas o sanciones inminentes. Incumplimiento legislativo evidente.",
-    },
-    Probabilidad: {
-      Improbable:
-        "Poca frecuencia de materialización o se presume que no llegará a materializarse.",
-      Posible:
-        "Materialización ocasional o se presume que eventualmente podría materializarse.",
-      Probable:
-        "Materialización frecuente o se presume que llegará a materializarse.",
-    },
-  },
-  11: {
-    pilar: "Cumplimiento",
-    riesgo: "Destrucción inadecuada de datos personales",
-    impacto: {
-      Leve: "No hay multas o sanciones asociadas. No se evidencia incumplimiento.",
-      Moderado:
-        "Pueden existir multas o sanciones menores. Se evidencia incumplimiento en algunos aspectos legales.",
-      Catastrófico:
-        "Multas o sanciones inminentes. Incumplimiento legislativo evidente.",
-    },
-    Probabilidad: {
-      Improbable:
-        "Poca frecuencia de materialización o se presume que no llegará a materializarse.",
-      Posible:
-        "Materialización ocasional o se presume que eventualmente podría materializarse.",
-      Probable:
-        "Materialización frecuente o se presume que llegará a materializarse.",
-    },
-  },
+const preguntas_ = [];
+const respuestas_ = [];
+
+const getRespuestas = () => {
+  for (let i = 0; i < preguntas_.length; i++) {
+    respuestas_.push({ impacto: 0, probabilidad: 0, riesgo_res: 0 });
+  }
+  console.log(respuestas_);
 };
 
-const respuestas = {
-  1: {
-    impacto: 0,
-    probabilidad: 0,
-    riesgo_res: 0,
-  },
-  2: {
-    impacto: 0,
-    probabilidad: 0,
-    riesgo_res: 0,
-  },
-  3: {
-    impacto: 0,
-    probabilidad: 0,
-    riesgo_res: 0,
-  },
-  4: {
-    impacto: 0,
-    probabilidad: 0,
-    riesgo_res: 0,
-  },
-  5: {
-    impacto: 0,
-    probabilidad: 0,
-    riesgo_res: 0,
-  },
-  6: {
-    impacto: 0,
-    probabilidad: 0,
-    riesgo_res: 0,
-  },
-  7: {
-    impacto: 0,
-    probabilidad: 0,
-    riesgo_res: 0,
-  },
-  8: {
-    impacto: 0,
-    probabilidad: 0,
-    riesgo_res: 0,
-  },
-  9: {
-    impacto: 0,
-    probabilidad: 0,
-    riesgo_res: 0,
-  },
-  10: {
-    impacto: 0,
-    probabilidad: 0,
-    riesgo_res: 0,
-  },
-  11: {
-    impacto: 0,
-    probabilidad: 0,
-    riesgo_res: 0,
-  },
-  nombre: "",
-  industria: "",
+const getPreguntas = () => {
+  let http = new XMLHttpRequest();
+  let url = "http://localhost/formulario/api.php?data=questions&action=get";
+  http.open("GET", url);
+  http.send();
+  http.onreadystatechange = (e) => {
+    let data = JSON.parse(http.responseText);
+    for (const key in data) {
+      const element = data[key];
+      preguntas_[key] = element;
+    }
+  };
+  
 };
+
+
+getPreguntas();
+
+
 
 const actualizarColorSelect = (n) => {
   let rie_ = document.getElementById("riesgo_res");
@@ -282,9 +40,10 @@ const actualizarColorSelect = (n) => {
   } else if (rie_.selectedIndex === 4) {
     rie_.style.backgroundColor = "#cf817e";
   } else if (rie_.selectedIndex === 0) {
-    rie_.style.backgroundColor = "#55595";
+    rie_.style.backgroundColor = "#f7f7f9";
   }
 };
+
 
 const calcularRiesgo = () => {
   let imp_ = document.getElementById("impacto");
@@ -319,67 +78,37 @@ const calcularRiesgo = () => {
   actualizarColorSelect();
 };
 
-const preguntas_ = [{}];
-const respuestas_ = [{}];
-
-const getRespuestas = ()=>{
-  for(let i=0; i<preguntas_.length; i++){
-    respuestas_[i].impacto = 0;
-    respuestas_[i].probabilidad = 0;
-    respuestas_[i].riesgo_res = 0;
-
-  }
-}
-
-
-const getPreguntas =()=>{
-  let http = new XMLHttpRequest();
-  let url = "http://localhost/formulario/api.php?data=questions&action=get";
-  http.open("GET", url);
-  http.send();
-  http.onreadystatechange = (e) => {
-    let data = JSON.parse(http.responseText);
-    for (const key in data) {
-      const element = data[key];
-      console.log(element);
-      preguntas_[key] = element;
-    }
-  };
-}
-
-getPreguntas();
-getRespuestas();
-
-var pregunta = 0 ;
-
+let pregunta = 0;
 
 const startTest = () => {
   show(2);
-  if (pregunta === 1) {
-    document.getElementById("btnPrevQuestion").setAttribute("disabled", "true");
-  }
-  cargarPregunta(0);
-  cargarRespuesta(0);
-  setProgreso(0,pregunta);
+  cargarPregunta(pregunta);
+  cargarRespuesta(pregunta);
+  actualizarColorSelect();
+  setProgreso(0, pregunta);
 };
 
 const nextQuestion = () => {
-  guardarRespuesta(pregunta);
-  pregunta++;
-  if (pregunta === preguntas_.length) {
-    show(3);
-    cargarTabla();
-    document.getElementById("tablaCompleta").style = "display:block";
-    return false;
-  }
-  if (pregunta !== 1) {
-    document.getElementById("btnPrevQuestion").setAttribute("disabled", "");
-  } else {
-  }
+  if (verificarRespuesta()) {
+    guardarRespuesta(pregunta);
+    pregunta++;
+    if (pregunta === preguntas_.length ) {
+      show(3);
+      cargarTabla();
+      document.getElementById("tablaCompleta").style = "display:block";
+      return false;
+    }
+    if (pregunta == 0) {
+      document.getElementById("btnPrevQuestion").setAttribute("disabled", "");
+    } else {
+    }
 
-  cargarPregunta(pregunta);
-  cargarRespuesta(pregunta);
-  setProgreso(Math.floor(pregunta*100/12), pregunta);
+    cargarPregunta(pregunta);
+    cargarRespuesta(pregunta);
+    actualizarColorSelect();
+    setProgreso(Math.floor((pregunta * 100) / preguntas_.length));
+    setPregunta(pregunta);
+  }
 };
 
 const prevQuestion = () => {
@@ -387,7 +116,9 @@ const prevQuestion = () => {
 
   cargarPregunta(pregunta);
   cargarRespuesta(pregunta);
-  setProgreso(Math.floor(pregunta*100/12)),pregunta;
+  actualizarColorSelect();
+  setProgreso(Math.floor((pregunta * 100) / preguntas_.length));
+  setPregunta(pregunta);
 };
 
 const limpiarRespuesta = () => {
@@ -401,11 +132,10 @@ const limpiarRespuesta = () => {
 
 const cargarPregunta = (n) => {
   let pilar = document.getElementById("pilar");
-  pilar.innerHTML = preguntas_[n]['pilar'];
+  pilar.innerHTML = preguntas_[n]["pilar"];
   let riesgo = document.getElementById("riesgo");
-  riesgo.innerHTML = preguntas_[n]['riesgo'];
+  riesgo.innerHTML = preguntas_[n]["riesgo"];
 };
-
 
 const guardarRespuesta = (n) => {
   let imp_ = document.getElementById("impacto");
@@ -417,7 +147,6 @@ const guardarRespuesta = (n) => {
   respuestas_[n].impacto = imp;
   respuestas_[n].probabilidad = pro;
   respuestas_[n].riesgo_res = rie;
-  console.log(respuestas_[n]);
 };
 
 const cargarRespuesta = (n) => {
@@ -432,7 +161,6 @@ const cargarRespuesta = (n) => {
 const cargarTabla = () => {
   tabla = document.getElementById("tabla");
   tabla.innerHTML = "";
-  console.table(respuestas_);
   for (let i = 0; i < preguntas_.length; i++) {
     tabla.innerHTML += `<tr class="table-warning">
     <td>${preguntas_[i].pilar}</td>
@@ -515,7 +243,6 @@ const cargarIndustrias = () => {
   http.send();
   http.onreadystatechange = (e) => {
     let data = JSON.parse(http.responseText);
-    console.log(data);
     let tabla = document.getElementById("select-industrias");
     tabla.innerHTML = "";
     for (const key in data) {
@@ -527,12 +254,25 @@ const cargarIndustrias = () => {
 
 cargarIndustrias();
 
-
-const setProgreso = (n,p)=>{
-  let barra = document.getElementById('barra-progreso');
+const setProgreso = (n) => {
+  let barra = document.getElementById("barra-progreso");
   barra.style = `width: ${n}%`;
   barra.ariaValueNow = n;
-  let span_progreso = document.getElementById('span-progreso');
-  span_progreso.innerHTML = `Pregunta ${p+1} de ${preguntas_.length}`
-}
+};
 
+const setPregunta = (p) => {
+  let span_progreso = document.getElementById("span-progreso");
+  span_progreso.innerHTML = `Pregunta ${p + 1} de ${preguntas_.length}`;
+};
+
+const verificarRespuesta = () => {
+  let imp = document.getElementById("impacto");
+  let prob = document.getElementById("probabilidad");
+  //let riesgo_res = document.getElementById('riesgo_res');
+  if (imp.selectedIndex == 0 || prob.selectedIndex == 0) {
+    document.getElementById("feedback-pregunta").style = "display: block";
+    return false;
+  } else {
+    return true;
+  }
+};
