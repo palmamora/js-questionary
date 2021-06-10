@@ -11,6 +11,12 @@
     <link rel="stylesheet" href="https://bootswatch.com/5/lux/bootstrap.css" crossorigin="anonymous">
 
 </head>
+<style>
+    .texto-vertical-2 {
+        writing-mode: vertical-lr;
+        transform: rotate(180deg);
+    }
+</style>
 
 <body>
     <nav class="navbar navbar-expand navbar-light bg-dark"></nav>
@@ -23,10 +29,18 @@
         <div class="row mt-4" id="div-inicio">
             <hr>
             <h2 class="text-center">AUTO EVALUACIÓN PRELIMINAR DE RIESGOS ASOCIADOS A PRIVACIDAD DE DATOS</h2>
-            <p>Esta herramienta fue diseñada en el contexto de una tesis de post grado asociada a un Magister en Ciberseguridad. A futuro se pretende ir mejorando y entregado un artefacto más robusto y más preciso.</p>
-            <p>Tiene como principal objetivo calcular un nivel de riesgo preliminar asociado a la protección de datos personales en su organización. Mediante una auto-evaluación de la probabilidad de ocurrencia e impacto al negocio de 10 riesgos previamente establecidos, entrega un cálculo estimado del riesgo.</p>
-            <p>El modelo de riesgos aborda cuatro ámbitos relevantes, tres de ellos asociados a la triada de seguridad de la información y un ámbito relacionado al cumplimiento de las buenas prácticas de protección de datos personales.</p>
-            <p>Tenga en cuenta que esta herramienta es una ayuda y, por tanto, la documentación resultante deberá estar adaptada y actualizada a la realidad de su organización en relación con la privacidad de datos personales.</p>
+            <p>Esta herramienta fue diseñada en el contexto de una tesis de post grado asociada a un Magister en
+                Ciberseguridad. A futuro se pretende ir mejorando y entregado un artefacto más robusto y más preciso.
+            </p>
+            <p>Tiene como principal objetivo calcular un nivel de riesgo preliminar asociado a la protección de datos
+                personales en su organización. Mediante una auto-evaluación de la probabilidad de ocurrencia e impacto
+                al negocio de 10 riesgos previamente establecidos, entrega un cálculo estimado del riesgo.</p>
+            <p>El modelo de riesgos aborda cuatro ámbitos relevantes, tres de ellos asociados a la triada de seguridad
+                de la información y un ámbito relacionado al cumplimiento de las buenas prácticas de protección de datos
+                personales.</p>
+            <p>Tenga en cuenta que esta herramienta es una ayuda y, por tanto, la documentación resultante deberá estar
+                adaptada y actualizada a la realidad de su organización en relación con la privacidad de datos
+                personales.</p>
             <div class="row justify-content-end mt-4">
                 <div class="col-6"></div>
                 <div class="col-6">
@@ -112,7 +126,7 @@
                         illum
                         debitis magni. Minima, ipsum placeat.</p>
             </div>
-            
+
             <div class="row">
                 <div class="col">
                     <div class="form-group">
@@ -151,10 +165,12 @@
                 </div>
             </div>
             <div class="mt-4 text-center">
-                <button id="btn-helper" style="background-color: #bdecb6;" class="btn btn-sm" data-toggle="collapse" data-target="#helper"><img src="./img/information.png" alt="" height="20px" width="20px"> Más información</button>
-                
+                <button id="btn-helper" style="background-color: #bdecb6;" class="btn btn-sm" data-toggle="collapse"
+                    data-target="#helper"><img src="./img/information.png" alt="" height="20px" width="20px"> Más
+                    información</button>
+
                 <div id="helper" class="collapse">
-                    
+
                 </div>
             </div>
 
@@ -195,8 +211,7 @@
             </div>
             <div class="row">
                 <div class="col-6">
-                    <button type="button" name="" id="" class="btn btn-danger"
-                        onclick="generarPDF();">GENERAR
+                    <button type="button" name="" id="" class="btn btn-danger" onclick="generarPDF();">GENERAR
                         PDF </button>
                 </div>
                 <div class="col-6">
@@ -227,10 +242,10 @@
     <!-- Footer -->
 
     <div style="display: none;" id="tablaCompleta" class="container p-5">
-        <table class="table table-hover">
+        <table class="table table-hover table-sm">
             <thead>
                 <tr>
-                    <th colspan="4">Resultados</th>
+                    <th colspan="5" class="text-center h5">Resultado Gestión de Riesgos</th>
                 </tr>
                 <tr>
                     <th>Pilar</th>
@@ -241,6 +256,51 @@
                 </tr>
             </thead>
             <tbody id="tabla">
+            </tbody>
+        </table>
+    </div>
+
+    <div style="display: none;" id="mapaCompleto" class="container p-5">
+        <table class="table table-borderless">
+            <thead class="table-sm">
+                <tr>
+                    <th colspan="5" class="text-center h5">Resumen Auto-evaluación</th>
+                </tr>
+                <tr>
+                    <th colspan="5" class="text-center h6">Nivel de Riesgos</th>
+                </tr>
+            </thead>
+
+            <tbody id="tablaMapaCalor" class="">
+                <tr>
+                    <td rowspan="5" class="text-center texto-vertical-2 table-dark" style="width: 15px;">Probabilidad</td>
+                    <td colspan="1" class="text-center">Probable</td>
+                    <td colspan="1" id="mc31" style="background-color: #c88f14; color: white;"> </td>
+                    <td colspan="1" id="mc32" style="background-color: #d42332; color: white;"> </td>
+                    <td colspan="1" id="mc33" style="background-color: #7c0a0a; color: white;"> </td>
+                </tr>
+                <tr>
+                    <td colspan="1" class="text-center"> Posible</td>
+                    <td colspan="1" id="mc21" style="background-color: #69923a; color: white;"> </td>
+                    <td colspan="1" id="mc22" style="background-color: #c88f14; color: white;"> </td>
+                    <td colspan="1" id="mc23" style="background-color: #d42332; color: white;"> </td>
+                </tr>
+                <tr>
+                    <td colspan="1" class="text-center">Improbable</td>
+                    <td colspan="1" id="mc11" style="background-color: #69923a; color: white;"> </td>
+                    <td colspan="1" id="mc12" style="background-color: #69923a; color: white;"> </td>
+                    <td colspan="1" id="mc13" style="background-color: #c88f14; color: white;"> </td>
+                </tr>
+                <tr>
+                    <td colspan="1" class="text-center"></td>
+                    <td colspan="1" style="width: 300px;" class="text-center">Leve</td>
+                    <td colspan="1" style="width: 300px;" class="text-center">Moderado</td>
+                    <td colspan="1" style="width: 300px;" class="text-center">Catastrófico</td>
+                </tr>
+                
+                <tr>
+                    <td colspan="4" class="text-center table-dark" style="height: 15px;">Impacto</td>
+                </tr>
             </tbody>
         </table>
     </div>

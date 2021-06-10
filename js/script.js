@@ -97,6 +97,8 @@ const nextQuestion = () => {
       show(3);
       cargarTabla();
       document.getElementById("tablaCompleta").style = "display:block";
+      generarMapaCalor();
+      document.getElementById("mapaCompleto").style = "display:block"
       return false;
     }
 
@@ -184,6 +186,7 @@ const cargarTabla = () => {
     </tr>`;
   }
   cargarColoresTabla();
+  generarMapaCalor();
 };
 
 const cargarColoresTabla = () => {
@@ -392,3 +395,22 @@ const enviarPDF = () => {
   http.onreadystatechange = (e) => {};
 };
 */
+const dataMap = [];
+const generarMapaCalor = () => { 
+  for (let i = 0; i < 3; i++) {
+    dataMap[i] = [];
+    for (let j = 0; j < 3; j++) {
+      dataMap[i].push(0);
+    }
+  }
+
+  for (let i = 0; i < respuestas_.length; i++) {
+    dataMap[respuestas_[i].probabilidad-1][respuestas_[i].impacto-1] ++;
+  }
+
+  for (let i = 0; i < 3; i++) {
+    for (let j = 0; j < 3; j++) {
+      if(dataMap[i][j]!==0) {document.getElementById('mc'+(i+1)+(j+1)).innerHTML = dataMap[i][j] + ' Riesgos' ;}
+    }
+  }
+};
