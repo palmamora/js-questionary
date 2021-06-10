@@ -22,24 +22,11 @@
 
         <div class="row mt-4" id="div-inicio">
             <hr>
-            <h2 class="text-center">PANTALLA DE INICIO</h2>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae tempora porro praesentium, quam eos,
-                assumenda non, aspernatur eius commodi architecto fugiat voluptas cum nisi quae adipisci asperiores
-                obcaecati nulla debitis!
-                Doloremque illum fugiat eligendi quos rerum earum voluptate nisi ex ipsam at itaque quo veniam,
-                reprehenderit ipsa molestiae? Modi quae officiis harum nostrum magnam! Architecto non veniam aut eius
-                odit?</p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint quidem quo alias fuga explicabo obcaecati
-                vitae, ratione ea mollitia beatae facere dolores in eius odit quia possimus vero, laboriosam culpa!
-                At ullam architecto necessitatibus, error est voluptate fugiat, provident porro suscipit blanditiis
-                dolorem rem dicta iste cumque incidunt. Minus ratione excepturi, atque provident quod quaerat veritatis
-                laudantium quia saepe totam.</p>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Asperiores alias earum ullam odit. Fugiat
-                explicabo, ipsum, temporibus sequi corporis possimus neque quod dolor natus aliquam voluptates
-                dignissimos illo veritatis at.
-                Consequuntur doloremque molestiae corporis voluptates optio inventore eaque eius impedit sapiente
-                eveniet asperiores alias eum, quaerat enim? Veritatis minima unde numquam asperiores provident nesciunt
-                illo praesentium, doloribus similique inventore repudiandae.</p>
+            <h2 class="text-center">AUTO EVALUACIÓN PRELIMINAR DE RIESGOS ASOCIADOS A PRIVACIDAD DE DATOS</h2>
+            <p>Esta herramienta fue diseñada en el contexto de una tesis de post grado asociada a un Magister en Ciberseguridad. A futuro se pretende ir mejorando y entregado un artefacto más robusto y más preciso.</p>
+            <p>Tiene como principal objetivo calcular un nivel de riesgo preliminar asociado a la protección de datos personales en su organización. Mediante una auto-evaluación de la probabilidad de ocurrencia e impacto al negocio de 10 riesgos previamente establecidos, entrega un cálculo estimado del riesgo.</p>
+            <p>El modelo de riesgos aborda cuatro ámbitos relevantes, tres de ellos asociados a la triada de seguridad de la información y un ámbito relacionado al cumplimiento de las buenas prácticas de protección de datos personales.</p>
+            <p>Tenga en cuenta que esta herramienta es una ayuda y, por tanto, la documentación resultante deberá estar adaptada y actualizada a la realidad de su organización en relación con la privacidad de datos personales.</p>
             <div class="row justify-content-end mt-4">
                 <div class="col-6"></div>
                 <div class="col-6">
@@ -56,20 +43,19 @@
         <div class="row mt-4" id="div-datos-iniciales" style="display: none;">
             <div class="row m-4">
                 <div class="btn-group" role="group" aria-label="Basic example">
-                    <button type="button" class="btn btn-warning" disabled>1.-Datos Iniciales</button>
+                    <button type="button" class="btn btn-warning" disabled>1.-Información General</button>
                     <button type="button" class="btn btn-secondary" disabled>2.-Gestión de Riesgos</button>
                     <button type="button" class="btn btn-secondary" disabled>3.-Resultados Finales</button>
                 </div>
             </div>
             <div class="row">
-                <h2 id="">DATOS INICIALES</h2>
-                <p id="">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repudiandae quasi sapiente a
-                    alias</p>
+                <h2 id="">INFORMACIÓN GENERAL</h2>
+                <p id="">Información ingresada solo será de uso interno para análisis estadístico.</p>
 
             </div>
             <div class="row">
 
-                <div class="col-9">
+                <div class="col-9 mb-2">
                     <div class="form-group">
                         <label for="">Correo electrónico</label>
                         <input type="email" class="form-control" name="email" id="email"
@@ -111,7 +97,7 @@
             <hr>
             <div class="row m-4">
                 <div class="btn-group" role="group" aria-label="Basic example">
-                    <button type="button" class="btn btn-secondary" disabled>1.-Datos Iniciales</button>
+                    <button type="button" class="btn btn-secondary" disabled>1.-Información General</button>
                     <button type="button" class="btn btn-warning" disabled>2.-Gestión de Riesgos</button>
                     <button type="button" class="btn btn-secondary" disabled>3.-Resultados</button>
                 </div>
@@ -126,13 +112,7 @@
                         illum
                         debitis magni. Minima, ipsum placeat.</p>
             </div>
-            <div class="">
-                <button id="btn-helper" class="btn btn-success btn-sm" data-toggle="collapse" data-target="#helper"><img src="./img/information.png" alt="" height="20px" width="20px"> Más información</button>
-                
-                <div id="helper" class="collapse">
-                    
-                </div>
-            </div>
+            
             <div class="row">
                 <div class="col">
                     <div class="form-group">
@@ -170,6 +150,13 @@
                     </div>
                 </div>
             </div>
+            <div class="mt-4 text-center">
+                <button id="btn-helper" style="background-color: #bdecb6;" class="btn btn-sm" data-toggle="collapse" data-target="#helper"><img src="./img/information.png" alt="" height="20px" width="20px"> Más información</button>
+                
+                <div id="helper" class="collapse">
+                    
+                </div>
+            </div>
 
             <div class="d-flex justify-content-center m-4">
                 <button type="button" onclick="prevQuestion()" name="" id="btnPrevQuestion"
@@ -197,7 +184,7 @@
             <div class="row">
                 <div class="row m-4">
                     <div class="btn-group" role="group" aria-label="Basic example">
-                        <button type="button" class="btn btn-secondary" disabled>1.-Datos Iniciales</button>
+                        <button type="button" class="btn btn-secondary" disabled>1.-Información General</button>
                         <button type="button" class="btn btn-secondary" disabled>2.-Gestión de Riesgos</button>
                         <button type="button" class="btn btn-warning" disabled>3.-Resultados Finales</button>
                     </div>
@@ -207,7 +194,11 @@
                 <p>- Generar informe de riesgos: genera un documento de base con el resultado del análisis realizado</p>
             </div>
             <div class="row">
-                <div class="col-6"></div>
+                <div class="col-6">
+                    <button type="button" name="" id="" class="btn btn-danger"
+                        onclick="generarPDF();">GENERAR
+                        PDF </button>
+                </div>
                 <div class="col-6">
                     <button type="button" name="" id="" class="btn btn-success"
                         onclick="tableToExcel('tabla', 'W3C Example Table')">GENERAR
@@ -257,7 +248,7 @@
 
 
 
-
+    <script src="./js/html2pdf.bundle.min.js"></script>
     <!-- Optional JavaScript -->
     <script src="./js/script.js"></script>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

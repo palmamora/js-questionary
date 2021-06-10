@@ -18,7 +18,7 @@ switch ($method) {
 
                 break;
             } else if (isset($_GET['data']) && $_GET['data'] == "questions" && isset($_GET['action']) && $_GET['action'] == 'get') {
-                $rs = $link->query("SELECT * FROM questions ORDER BY pilar;");
+                $rs = $link->query("SELECT * FROM questions ORDER BY id;");
                 $data = [];
                 while ($row = $rs->fetch_assoc()) {
                     array_push($data, $row);

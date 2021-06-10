@@ -1,6 +1,6 @@
 const preguntas_ = [];
 const respuestas_ = [];
-const host = 'http://localhost/'
+const host = "http://localhost/";
 
 const getRespuestas = () => {
   for (let i = 0; i < preguntas_.length; i++) {
@@ -108,7 +108,7 @@ const nextQuestion = () => {
     setPregunta(pregunta);
     if (pregunta !== 0) {
       document.getElementById("btnPrevQuestion").classList.remove("disabled");
-    }else{
+    } else {
       document.getElementById("btnPrevQuestion").classList.add("disabled");
     }
   }
@@ -125,7 +125,7 @@ const prevQuestion = () => {
   setPregunta(pregunta);
   if (pregunta !== 0) {
     document.getElementById("btnPrevQuestion").classList.remove("disabled");
-  }else{
+  } else {
     document.getElementById("btnPrevQuestion").classList.add("disabled");
   }
   document.getElementById("feedback-pregunta").style = "display: none";
@@ -155,8 +155,11 @@ const guardarRespuesta = (n) => {
   let rie_ = document.getElementById("riesgo_res");
   let rie = rie_.selectedIndex;
   respuestas_[n].impacto = imp;
+  respuestas_[n].impacto_text = imp_.options[imp].text;
   respuestas_[n].probabilidad = pro;
+  respuestas_[n].probabilidad_text = pro_.options[pro].text;
   respuestas_[n].riesgo_res = rie;
+  respuestas_[n].riesgo_res_text = rie_.options[rie].text;
 };
 
 const cargarRespuesta = (n) => {
@@ -172,13 +175,69 @@ const cargarTabla = () => {
   tabla = document.getElementById("tabla");
   tabla.innerHTML = "";
   for (let i = 0; i < preguntas_.length; i++) {
-    tabla.innerHTML += `<tr class="table-warning">
+    tabla.innerHTML += `<tr scope="row">
     <td>${preguntas_[i].pilar}</td>
     <td>${preguntas_[i].riesgo}</td>
-    <td>${respuestas_[i].impacto}</td>
-    <td>${respuestas_[i].probabilidad}</td>
-    <td>${respuestas_[i].riesgo_res}</td>
+    <td id="td-imp-${i}" class="">${respuestas_[i].impacto_text}</td>
+    <td id="td-pro-${i}" class="">${respuestas_[i].probabilidad_text}</td>
+    <td id="td-rie-${i}" class="">${respuestas_[i].riesgo_res_text}</td>
     </tr>`;
+  }
+  cargarColoresTabla();
+};
+
+const cargarColoresTabla = () => {
+  for (let i = 0; i < preguntas_.length; i++) {
+    td_imp = document.getElementById("td-imp-" + i);
+    td_pro = document.getElementById("td-pro-" + i);
+    td_rie = document.getElementById("td-rie-" + i);
+    switch (respuestas_[i].impacto_text) {
+      case "Leve":
+        td_imp.classList = "table-success";
+        break;
+      case "Moderado":
+        td_imp.classList = "table-warning";
+        break;
+      case "Catastrófico":
+        td_imp.classList = "table-danger";
+        break;
+
+      default:
+        break;
+    }
+
+    switch (respuestas_[i].probabilidad_text) {
+      case "Improbable":
+        td_pro.classList = "table-success";
+        break;
+      case "Posible":
+        td_pro.classList = "table-warning";
+        break;
+      case "Probable":
+        td_pro.classList = "table-danger";
+        break;
+
+      default:
+        break;
+    }
+
+    switch (respuestas_[i].riesgo_res_text) {
+      case "Bajo":
+        td_rie.classList = "table-success";
+        break;
+      case "Medio":
+        td_rie.classList = "table-warning";
+        break;
+      case "Alto":
+        td_rie.classList = "table-danger";
+        break;
+      case "Crítico":
+        td_rie.style = "background-color:#cf817e;";
+        break;
+
+      default:
+        break;
+    }
   }
 };
 
@@ -286,7 +345,7 @@ const verificarRespuesta = () => {
 };
 
 const cargarInformacion = (n) => {
-  let info = document.getElementById('helper');
+  let info = document.getElementById("helper");
   info.innerHTML = `Impacto:<br>
                     -Leve: ${preguntas_[n].impactoleve}<br>
                     -Moderado: ${preguntas_[n].impactomoderado}<br>
@@ -294,5 +353,42 @@ const cargarInformacion = (n) => {
                     Probabilidad:<br>
                     -Improbable: ${preguntas_[n].probimpr}
                     -Posible: ${preguntas_[n].probposi}
-                    -Probable: ${preguntas_[n].probprob}`
-}
+                    -Probable: ${preguntas_[n].probprob}`;
+};
+
+const generarPDF = () => {
+  html2pdf()
+    .set({
+      margin: 1,
+      filename: "documento.pdf",
+      image: {
+        type: "jpeg",
+        quality: 0.98,
+      },
+      html2canvas: {
+        scale: 3, // A mayor escala, mejores gráficos, pero más peso
+        letterRendering: true,
+      },
+      jsPDF: {
+        unit: "in",
+        format: "a3",
+        orientation: "portrait", // landscape o portrait
+      },
+    })
+    .from(document.getElementById("tabla"))
+    .save()
+    .catch((err) => console.log(err));
+};
+
+/*
+const enviarPDF = () => {
+  let http = new XMLHttpRequest();
+  let url = `${host}formulario/enviar_correo.php`;
+  let pdf = new jsPDF("p", "pt", "letter");
+  console.log(pdf);
+  return false;
+  http.open("POST", url);
+  http.send({ pdf: pdf });
+  http.onreadystatechange = (e) => {};
+};
+*/
