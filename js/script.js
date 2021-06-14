@@ -1,6 +1,26 @@
 const preguntas_ = [];
 const respuestas_ = [];
-const host = "http://localhost/";
+const host = 'http://localhost/formulario/'
+
+const dataMap = [];
+const generarMapaCalor = () => { 
+  for (let i = 0; i < 3; i++) {
+    dataMap[i] = [];
+    for (let j = 0; j < 3; j++) {
+      dataMap[i].push(0);
+    }
+  }
+
+  for (let i = 0; i < respuestas_.length; i++) {
+    dataMap[respuestas_[i].probabilidad-1][respuestas_[i].impacto-1] ++;
+  }
+
+  for (let i = 0; i < 3; i++) {
+    for (let j = 0; j < 3; j++) {
+      if(dataMap[i][j]!==0) {document.getElementById('mc'+(i+1)+(j+1)).innerHTML = dataMap[i][j] + ' Riesgos' ;}
+    }
+  }
+};
 
 const getRespuestas = () => {
   for (let i = 0; i < preguntas_.length; i++) {
@@ -11,7 +31,7 @@ const getRespuestas = () => {
 
 const getPreguntas = () => {
   let http = new XMLHttpRequest();
-  let url = `${host}formulario/api.php?data=questions&action=get`;
+  let url = `${host}api.php?data=questions&action=get`;
   http.open("GET", url);
   http.send();
   http.onreadystatechange = (e) => {
@@ -74,6 +94,41 @@ const calcularRiesgo = () => {
   actualizarColorSelect();
 };
 
+const cargarInformacion = (n) => {
+  let info = document.getElementById("helper");
+  info.innerHTML = `Impacto:<br>
+                    -Leve: ${preguntas_[n].impactoleve}<br>
+                    -Moderado: ${preguntas_[n].impactomoderado}<br>
+                    -Catastrófico: ${preguntas_[n].impactograve}<br>
+                    Probabilidad:<br>
+                    -Improbable: ${preguntas_[n].probimpr}
+                    -Posible: ${preguntas_[n].probposi}
+                    -Probable: ${preguntas_[n].probprob}`;
+};
+
+const verificarRespuesta = () => {
+  let imp = document.getElementById("impacto");
+  let prob = document.getElementById("probabilidad");
+  //let riesgo_res = document.getElementById('riesgo_res');
+  if (imp.selectedIndex == 0 || prob.selectedIndex == 0) {
+    document.getElementById("feedback-pregunta").style = "display: block";
+    return false;
+  } else {
+    return true;
+  }
+};
+
+const setProgreso = (n) => {
+  let barra = document.getElementById("barra-progreso");
+  barra.style = `width: ${n}%`;
+  barra.ariaValueNow = n;
+};
+
+const setPregunta = (p) => {
+  let span_progreso = document.getElementById("span-progreso");
+  span_progreso.innerHTML = `Pregunta ${p + 1} de ${preguntas_.length}`;
+};
+
 let pregunta = 0;
 
 const startTest = () => {
@@ -99,6 +154,7 @@ const nextQuestion = () => {
       document.getElementById("tablaCompleta").style = "display:block";
       generarMapaCalor();
       document.getElementById("mapaCompleto").style = "display:block"
+      document.getElementById("tituloPDF").style = "display:block"
       return false;
     }
 
@@ -185,6 +241,8 @@ const cargarTabla = () => {
     <td id="td-rie-${i}" class="">${respuestas_[i].riesgo_res_text}</td>
     </tr>`;
   }
+  document.getElementById('correo_').innerHTML = document.getElementById('email').value;
+  document.getElementById('industria_').innerHTML = document.getElementById('select-industrias').options[document.getElementById('select-industrias').selectedIndex].text;
   cargarColoresTabla();
   generarMapaCalor();
 };
@@ -308,7 +366,7 @@ const btnDatosIniciales = () => {
 
 const cargarIndustrias = () => {
   let http = new XMLHttpRequest();
-  let url = `${host}formulario/api.php?data=industrias&action=get`;
+  let url = `${host}api.php?data=industrias&action=get`;
   http.open("GET", url);
   http.send();
   http.onreadystatechange = (e) => {
@@ -324,46 +382,12 @@ const cargarIndustrias = () => {
 
 cargarIndustrias();
 
-const setProgreso = (n) => {
-  let barra = document.getElementById("barra-progreso");
-  barra.style = `width: ${n}%`;
-  barra.ariaValueNow = n;
-};
-
-const setPregunta = (p) => {
-  let span_progreso = document.getElementById("span-progreso");
-  span_progreso.innerHTML = `Pregunta ${p + 1} de ${preguntas_.length}`;
-};
-
-const verificarRespuesta = () => {
-  let imp = document.getElementById("impacto");
-  let prob = document.getElementById("probabilidad");
-  //let riesgo_res = document.getElementById('riesgo_res');
-  if (imp.selectedIndex == 0 || prob.selectedIndex == 0) {
-    document.getElementById("feedback-pregunta").style = "display: block";
-    return false;
-  } else {
-    return true;
-  }
-};
-
-const cargarInformacion = (n) => {
-  let info = document.getElementById("helper");
-  info.innerHTML = `Impacto:<br>
-                    -Leve: ${preguntas_[n].impactoleve}<br>
-                    -Moderado: ${preguntas_[n].impactomoderado}<br>
-                    -Catastrófico: ${preguntas_[n].impactograve}<br>
-                    Probabilidad:<br>
-                    -Improbable: ${preguntas_[n].probimpr}
-                    -Posible: ${preguntas_[n].probposi}
-                    -Probable: ${preguntas_[n].probprob}`;
-};
-
 const generarPDF = () => {
+  fecha = new Date();
   html2pdf()
     .set({
       margin: 1,
-      filename: "documento.pdf",
+      filename: `Resultados${fecha.getDate()}_${fecha.getMonth() +1}_${fecha.getFullYear()}.pdf`,
       image: {
         type: "jpeg",
         quality: 0.98,
@@ -375,10 +399,10 @@ const generarPDF = () => {
       jsPDF: {
         unit: "in",
         format: "a3",
-        orientation: "portrait", // landscape o portrait
+        orientation: "landscape", // landscape o portrait
       },
     })
-    .from(document.getElementById("tabla"))
+    .from(document.getElementById("divPDF"))
     .save()
     .catch((err) => console.log(err));
 };
@@ -395,22 +419,3 @@ const enviarPDF = () => {
   http.onreadystatechange = (e) => {};
 };
 */
-const dataMap = [];
-const generarMapaCalor = () => { 
-  for (let i = 0; i < 3; i++) {
-    dataMap[i] = [];
-    for (let j = 0; j < 3; j++) {
-      dataMap[i].push(0);
-    }
-  }
-
-  for (let i = 0; i < respuestas_.length; i++) {
-    dataMap[respuestas_[i].probabilidad-1][respuestas_[i].impacto-1] ++;
-  }
-
-  for (let i = 0; i < 3; i++) {
-    for (let j = 0; j < 3; j++) {
-      if(dataMap[i][j]!==0) {document.getElementById('mc'+(i+1)+(j+1)).innerHTML = dataMap[i][j] + ' Riesgos' ;}
-    }
-  }
-};

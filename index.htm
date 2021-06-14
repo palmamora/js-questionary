@@ -166,8 +166,8 @@
             </div>
             <div class="mt-4 text-center">
                 <button id="btn-helper" style="background-color: #bdecb6;" class="btn btn-sm" data-toggle="collapse"
-                    data-target="#helper"><img src="./img/information.png" alt="" height="20px" width="20px"> Más
-                    información</button>
+                    data-target="#helper"><img src="./img/information.png" alt="" height="20px" width="20px"> Criterios
+                    de evaluación</button>
 
                 <div id="helper" class="collapse">
 
@@ -240,69 +240,77 @@
 
     </footer>
     <!-- Footer -->
+    <div id="divPDF">
+        <div id="tituloPDF" style="display: none;">
+            <p class="h4 text-center">Resultado Auto-evaluación de Riesgos</p>
+            <p class="h5">Datos Generales</p><br>
+            <p id="correo_" class="h5">...</p>
+            <p id="industria_" class="h5">...</p>
+        </div>
+        <div style="display: none;" id="tablaCompleta" class="container p-5">
+            <table class="table table-hover table-sm">
+                <thead>
+                    <tr>
+                        <th colspan="5" class="text-center h5">Resultado Gestión de Riesgos</th>
+                    </tr>
+                    <tr>
+                        <th>Pilar</th>
+                        <th>Riesgo</th>
+                        <th>Impacto</th>
+                        <th>Probabilidad</th>
+                        <th>Riesgo</th>
+                    </tr>
+                </thead>
+                <tbody id="tabla">
+                </tbody>
+            </table>
+        </div>
 
-    <div style="display: none;" id="tablaCompleta" class="container p-5">
-        <table class="table table-hover table-sm">
-            <thead>
-                <tr>
-                    <th colspan="5" class="text-center h5">Resultado Gestión de Riesgos</th>
-                </tr>
-                <tr>
-                    <th>Pilar</th>
-                    <th>Riesgo</th>
-                    <th>Impacto</th>
-                    <th>Probabilidad</th>
-                    <th>Riesgo</th>
-                </tr>
-            </thead>
-            <tbody id="tabla">
-            </tbody>
-        </table>
-    </div>
+        <div style="display: none;" id="mapaCompleto" class="container p-5">
+            <table class="table table-borderless">
+                <thead class="table-sm">
+                    <tr>
+                        <th colspan="5" class="text-center h5">Resumen Auto-evaluación</th>
+                    </tr>
+                    <tr>
+                        <th colspan="5" class="text-center h6">Nivel de Riesgos</th>
+                    </tr>
+                </thead>
 
-    <div style="display: none;" id="mapaCompleto" class="container p-5">
-        <table class="table table-borderless">
-            <thead class="table-sm">
-                <tr>
-                    <th colspan="5" class="text-center h5">Resumen Auto-evaluación</th>
-                </tr>
-                <tr>
-                    <th colspan="5" class="text-center h6">Nivel de Riesgos</th>
-                </tr>
-            </thead>
+                <tbody id="tablaMapaCalor" class="">
+                    <tr>
+                        <td rowspan="5" class="text-center texto-vertical-2 table-dark" style="width: 15px;">
+                            Probabilidad</td>
+                        <td colspan="1" class="text-center">Probable</td>
+                        <td colspan="1" id="mc31" style="background-color: #c88f14; color: white;"> </td>
+                        <td colspan="1" id="mc32" style="background-color: #d42332; color: white;"> </td>
+                        <td colspan="1" id="mc33" style="background-color: #7c0a0a; color: white;"> </td>
+                    </tr>
+                    <tr>
+                        <td colspan="1" class="text-center"> Posible</td>
+                        <td colspan="1" id="mc21" style="background-color: #69923a; color: white;"> </td>
+                        <td colspan="1" id="mc22" style="background-color: #c88f14; color: white;"> </td>
+                        <td colspan="1" id="mc23" style="background-color: #d42332; color: white;"> </td>
+                    </tr>
+                    <tr>
+                        <td colspan="1" class="text-center">Improbable</td>
+                        <td colspan="1" id="mc11" style="background-color: #69923a; color: white;"> </td>
+                        <td colspan="1" id="mc12" style="background-color: #69923a; color: white;"> </td>
+                        <td colspan="1" id="mc13" style="background-color: #c88f14; color: white;"> </td>
+                    </tr>
+                    <tr>
+                        <td colspan="1" class="text-center"></td>
+                        <td colspan="1" style="width: 300px;" class="text-center">Leve</td>
+                        <td colspan="1" style="width: 300px;" class="text-center">Moderado</td>
+                        <td colspan="1" style="width: 300px;" class="text-center">Catastrófico</td>
+                    </tr>
 
-            <tbody id="tablaMapaCalor" class="">
-                <tr>
-                    <td rowspan="5" class="text-center texto-vertical-2 table-dark" style="width: 15px;">Probabilidad</td>
-                    <td colspan="1" class="text-center">Probable</td>
-                    <td colspan="1" id="mc31" style="background-color: #c88f14; color: white;"> </td>
-                    <td colspan="1" id="mc32" style="background-color: #d42332; color: white;"> </td>
-                    <td colspan="1" id="mc33" style="background-color: #7c0a0a; color: white;"> </td>
-                </tr>
-                <tr>
-                    <td colspan="1" class="text-center"> Posible</td>
-                    <td colspan="1" id="mc21" style="background-color: #69923a; color: white;"> </td>
-                    <td colspan="1" id="mc22" style="background-color: #c88f14; color: white;"> </td>
-                    <td colspan="1" id="mc23" style="background-color: #d42332; color: white;"> </td>
-                </tr>
-                <tr>
-                    <td colspan="1" class="text-center">Improbable</td>
-                    <td colspan="1" id="mc11" style="background-color: #69923a; color: white;"> </td>
-                    <td colspan="1" id="mc12" style="background-color: #69923a; color: white;"> </td>
-                    <td colspan="1" id="mc13" style="background-color: #c88f14; color: white;"> </td>
-                </tr>
-                <tr>
-                    <td colspan="1" class="text-center"></td>
-                    <td colspan="1" style="width: 300px;" class="text-center">Leve</td>
-                    <td colspan="1" style="width: 300px;" class="text-center">Moderado</td>
-                    <td colspan="1" style="width: 300px;" class="text-center">Catastrófico</td>
-                </tr>
-                
-                <tr>
-                    <td colspan="4" class="text-center table-dark" style="height: 15px;">Impacto</td>
-                </tr>
-            </tbody>
-        </table>
+                    <tr>
+                        <td colspan="4" class="text-center table-dark" style="height: 15px;">Impacto</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 
 
