@@ -164,11 +164,13 @@
                     </div>
                 </div>
             </div>
-            <div class="mt-4 text-center">
-                <button id="btn-helper" style="background-color: #bdecb6;" class="btn btn-sm" data-toggle="collapse"
-                    data-target="#helper"><img src="./img/information.png" alt="" height="20px" width="20px"> Criterios
-                    de evaluación</button>
-
+            <div class="mt-4">
+                <div class="text-center">
+                    <button id="btn-helper text-center" style="background-color: #bdecb6;" class="btn btn-sm"
+                        data-toggle="collapse" data-target="#helper"><img src="./img/information.png" alt=""
+                            height="20px" width="20px"> Criterios
+                        de evaluación</button>
+                </div>
                 <div id="helper" class="collapse">
 
                 </div>
@@ -240,18 +242,21 @@
 
     </footer>
     <!-- Footer -->
-    <div id="divPDF">
-        <div id="tituloPDF" style="display: none;">
+    <div id="divPDF" style="width: 1600px;">
+        <div id="tituloPDF" style="display: none;" class="p-2">
+            <p>A continuación se presentan los resultados de la auto-evaluación preliminar de riesgos asociados a la protección de datos personales. Tenga en cuenta que esta herramienta es una guía y, por tanto, si requiere profundizar en este análisis contáctese con la Propietaria de esta herramienta.</p>
+            <p style="font-weight: bold;">Contacto: pamela.aog@gmail.com</p>
+            <hr>
             <p class="h4 text-center">Resultado Auto-evaluación de Riesgos</p>
             <p class="h5">Datos Generales</p><br>
-            <p id="correo_" class="h5">...</p>
-            <p id="industria_" class="h5">...</p>
+            <p id="correo_" class="h6">...</p>
+            <p id="industria_" class="h6">...</p>
         </div>
-        <div style="display: none;" id="tablaCompleta" class="container p-5">
-            <table class="table table-hover table-sm">
+        <div style="display: none;" id="tablaCompleta" class="p-2">
+            <table class="table table-hover table-sm ">
                 <thead>
                     <tr>
-                        <th colspan="5" class="text-center h5">Resultado Gestión de Riesgos</th>
+                        <th colspan="5" class="h5">Resultado Gestión de Riesgos</th>
                     </tr>
                     <tr>
                         <th>Pilar</th>
@@ -266,11 +271,11 @@
             </table>
         </div>
 
-        <div style="display: none;" id="mapaCompleto" class="container p-5">
-            <table class="table table-borderless">
+        <div style="display: none;" id="mapaCompleto" class="p-2">
+            <table class="table table-borderless container">
                 <thead class="table-sm">
                     <tr>
-                        <th colspan="5" class="text-center h5">Resumen Auto-evaluación</th>
+                        <th colspan="5" class="h5">Resumen Auto-evaluación</th>
                     </tr>
                     <tr>
                         <th colspan="5" class="text-center h6">Nivel de Riesgos</th>
@@ -282,21 +287,21 @@
                         <td rowspan="5" class="text-center texto-vertical-2 table-dark" style="width: 15px;">
                             Probabilidad</td>
                         <td colspan="1" class="text-center">Probable</td>
-                        <td colspan="1" id="mc31" style="background-color: #c88f14; color: white;"> </td>
-                        <td colspan="1" id="mc32" style="background-color: #d42332; color: white;"> </td>
-                        <td colspan="1" id="mc33" style="background-color: #7c0a0a; color: white;"> </td>
+                        <td colspan="1" class="text-center table-warning" id="mc31"> </td>
+                        <td colspan="1" class="text-center table-danger" id="mc32"> </td>
+                        <td colspan="1" class="text-center" id="mc33" style="background-color: #cf817e; color: white;"> </td>
                     </tr>
                     <tr>
                         <td colspan="1" class="text-center"> Posible</td>
-                        <td colspan="1" id="mc21" style="background-color: #69923a; color: white;"> </td>
-                        <td colspan="1" id="mc22" style="background-color: #c88f14; color: white;"> </td>
-                        <td colspan="1" id="mc23" style="background-color: #d42332; color: white;"> </td>
+                        <td colspan="1" class="text-center table-success" id="mc21"> </td>
+                        <td colspan="1" class="text-center table-warning" id="mc22"> </td>
+                        <td colspan="1" class="text-center table-danger" id="mc23"> </td>
                     </tr>
                     <tr>
                         <td colspan="1" class="text-center">Improbable</td>
-                        <td colspan="1" id="mc11" style="background-color: #69923a; color: white;"> </td>
-                        <td colspan="1" id="mc12" style="background-color: #69923a; color: white;"> </td>
-                        <td colspan="1" id="mc13" style="background-color: #c88f14; color: white;"> </td>
+                        <td colspan="1" class="text-center table-success" id="mc11"> </td>
+                        <td colspan="1" class="text-center table-success" id="mc12"> </td>
+                        <td colspan="1" class="text-center table-warning" id="mc13"> </td>
                     </tr>
                     <tr>
                         <td colspan="1" class="text-center"></td>

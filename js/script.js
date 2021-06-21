@@ -1,9 +1,9 @@
 const preguntas_ = [];
 const respuestas_ = [];
-const host = 'http://localhost/formulario/'
+const host = "http://localhost/formulario/";
 
 const dataMap = [];
-const generarMapaCalor = () => { 
+const generarMapaCalor = () => {
   for (let i = 0; i < 3; i++) {
     dataMap[i] = [];
     for (let j = 0; j < 3; j++) {
@@ -12,12 +12,15 @@ const generarMapaCalor = () => {
   }
 
   for (let i = 0; i < respuestas_.length; i++) {
-    dataMap[respuestas_[i].probabilidad-1][respuestas_[i].impacto-1] ++;
+    dataMap[respuestas_[i].probabilidad - 1][respuestas_[i].impacto - 1]++;
   }
 
   for (let i = 0; i < 3; i++) {
     for (let j = 0; j < 3; j++) {
-      if(dataMap[i][j]!==0) {document.getElementById('mc'+(i+1)+(j+1)).innerHTML = dataMap[i][j] + ' Riesgos' ;}
+      if (dataMap[i][j] !== 0) {
+        document.getElementById("mc" + (i + 1) + (j + 1)).innerHTML =
+          dataMap[i][j] + "";
+      }
     }
   }
 };
@@ -96,14 +99,14 @@ const calcularRiesgo = () => {
 
 const cargarInformacion = (n) => {
   let info = document.getElementById("helper");
-  info.innerHTML = `Impacto:<br>
-                    -Leve: ${preguntas_[n].impactoleve}<br>
-                    -Moderado: ${preguntas_[n].impactomoderado}<br>
-                    -Catastrófico: ${preguntas_[n].impactograve}<br>
-                    Probabilidad:<br>
-                    -Improbable: ${preguntas_[n].probimpr}
-                    -Posible: ${preguntas_[n].probposi}
-                    -Probable: ${preguntas_[n].probprob}`;
+  info.innerHTML = `<p style="font-weight:bold">Impacto:</p>
+                    <strong style="font-weight:bold">-Leve:</strong> ${preguntas_[n].impactoleve}<br>
+                    <strong style="font-weight:bold">-Moderado:</strong> ${preguntas_[n].impactomoderado}<br>
+                    <strong style="font-weight:bold">-Catastrófico:</strong> ${preguntas_[n].impactograve}<br><br>
+                    <p style="font-weight:bold">Probabilidad:</p>
+                    <strong style="font-weight:bold">-Improbable:</strong> ${preguntas_[n].probimpr}<br>
+                    <strong style="font-weight:bold">-Posible:</strong> ${preguntas_[n].probposi}<br>
+                    <strong style="font-weight:bold">-Probable:</strong> ${preguntas_[n].probprob}<br>`;
 };
 
 const verificarRespuesta = () => {
@@ -153,8 +156,8 @@ const nextQuestion = () => {
       cargarTabla();
       document.getElementById("tablaCompleta").style = "display:block";
       generarMapaCalor();
-      document.getElementById("mapaCompleto").style = "display:block"
-      document.getElementById("tituloPDF").style = "display:block"
+      document.getElementById("mapaCompleto").style = "display:block";
+      document.getElementById("tituloPDF").style = "display:block";
       return false;
     }
 
@@ -241,8 +244,13 @@ const cargarTabla = () => {
     <td id="td-rie-${i}" class="">${respuestas_[i].riesgo_res_text}</td>
     </tr>`;
   }
-  document.getElementById('correo_').innerHTML = document.getElementById('email').value;
-  document.getElementById('industria_').innerHTML = document.getElementById('select-industrias').options[document.getElementById('select-industrias').selectedIndex].text;
+  document.getElementById("correo_").innerHTML =
+    "Correo: " + document.getElementById("email").value;
+  document.getElementById("industria_").innerHTML =
+    "Industria: " +
+    document.getElementById("select-industrias").options[
+      document.getElementById("select-industrias").selectedIndex
+    ].text;
   cargarColoresTabla();
   generarMapaCalor();
 };
@@ -382,40 +390,72 @@ const cargarIndustrias = () => {
 
 cargarIndustrias();
 
+const enviarPDF = (pdf, correo, industria) => {
+  let http = new XMLHttpRequest();
+  let url = `${host}enviar_correo.php`;
+  let data = new FormData();
+  let content = document.getElementById("divPDF");
+  data.append("correo", correo);
+  data.append("industria", industria);
+  data.append("pdf", pdf);
+  fetch(`${host}enviar_correo.php`, {
+    method: "POST",
+    body: data,
+  })
+    .then(function (r) {
+      if (r.ok) {
+        return r.text();
+      } else {
+        throw "Error en la llamada Ajax";
+      }
+    })
+    .then(function (t) {
+      console.log(t);
+    })
+    .catch(function (e) {
+      console.log(e);
+    });
+};
+
 const generarPDF = () => {
   fecha = new Date();
-  html2pdf()
-    .set({
-      margin: 1,
-      filename: `Resultados${fecha.getDate()}_${fecha.getMonth() +1}_${fecha.getFullYear()}.pdf`,
-      image: {
-        type: "jpeg",
-        quality: 0.98,
-      },
-      html2canvas: {
-        scale: 3, // A mayor escala, mejores gráficos, pero más peso
-        letterRendering: true,
-      },
-      jsPDF: {
-        unit: "in",
-        format: "a3",
-        orientation: "landscape", // landscape o portrait
-      },
-    })
+  let opt = {
+    margin: 1,
+    filename: `Resultados_${fecha.getDate()}_${
+      fecha.getMonth() + 1
+    }_${fecha.getFullYear()}.pdf`,
+    image: {
+      type: "jpeg",
+      quality: 0.98,
+    },
+    html2canvas: {
+      scale: 3, // A mayor escala, mejores gráficos, pero más peso
+      letterRendering: true,
+    },
+    jsPDF: {
+      unit: "in",
+      format: "a3",
+      orientation: "landscape", // landscape o portrait
+    },
+    pagebrak: {
+      mode: "avoid-all",
+      before: "#tituloPDF",
+    },
+  };
+  let pdf = html2pdf()
+    .set(opt)
     .from(document.getElementById("divPDF"))
     .save()
     .catch((err) => console.log(err));
-};
 
-/*
-const enviarPDF = () => {
-  let http = new XMLHttpRequest();
-  let url = `${host}formulario/enviar_correo.php`;
-  let pdf = new jsPDF("p", "pt", "letter");
-  console.log(pdf);
-  return false;
-  http.open("POST", url);
-  http.send({ pdf: pdf });
-  http.onreadystatechange = (e) => {};
+  let pdf2 = html2pdf()
+    .set(opt)
+    .from(document.getElementById("divPDF"))
+    .toPdf()
+    .output("datauristring")
+    .then(function (pdfAsString) {
+      let correo = document.getElementById("email").value;
+      let industria = document.getElementById("select-industrias").options[document.getElementById("select-industrias").selectedIndex].text;
+      enviarPDF(pdfAsString, correo, industria);
+    });
 };
-*/
