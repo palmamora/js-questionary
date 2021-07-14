@@ -77,10 +77,9 @@ const actualizarRecomendacion = (n) => {
   } else if (rie_.selectedIndex === 4) {
     rec_.innerHTML = `${preguntas_[n].remcritico}`;
   } else if (rie_.selectedIndex === 0) {
-    rec_.innerHTML = '';
+    rec_.innerHTML = "";
   }
 };
-
 
 const calcularRiesgo = () => {
   let imp_ = document.getElementById("impacto");
@@ -126,7 +125,6 @@ const cargarInformacion = (n) => {
                     <strong style="font-weight:bold">-Improbable:</strong> ${preguntas_[n].probimpr}<br>
                     <strong style="font-weight:bold">-Posible:</strong> ${preguntas_[n].probposi}<br>
                     <strong style="font-weight:bold">-Probable:</strong> ${preguntas_[n].probprob}<br>`;
-                    
 };
 
 const verificarRespuesta = () => {
@@ -258,12 +256,23 @@ const cargarTabla = () => {
   tabla = document.getElementById("tabla");
   tabla.innerHTML = "";
   for (let i = 0; i < preguntas_.length; i++) {
+    let rec_text = "";
+    if (respuestas_[i].riesgo_res_text == "Alto") {
+      rec_text = preguntas_[i].remalto;
+    } else if (respuestas_[i].riesgo_res_text == "Medio") {
+      rec_text = preguntas_[i].remmedio;
+    } else if (respuestas_[i].riesgo_res_text == "Bajo") {
+      rec_text = preguntas_[i].rembajo;
+    } else if (respuestas_[i].riesgo_res_text == "Crítico") {
+      rec_text = preguntas_[i].remcritico;
+    }
     tabla.innerHTML += `<tr scope="row">
     <td>${preguntas_[i].pilar}</td>
     <td>${preguntas_[i].riesgo}</td>
     <td id="td-imp-${i}" class="">${respuestas_[i].impacto_text}</td>
     <td id="td-pro-${i}" class="">${respuestas_[i].probabilidad_text}</td>
     <td id="td-rie-${i}" class="">${respuestas_[i].riesgo_res_text}</td>
+    <td id="td-rec-${i}" class="">${rec_text}</td>
     </tr>`;
   }
   document.getElementById("correo_").innerHTML =
@@ -282,6 +291,7 @@ const cargarColoresTabla = () => {
     td_imp = document.getElementById("td-imp-" + i);
     td_pro = document.getElementById("td-pro-" + i);
     td_rie = document.getElementById("td-rie-" + i);
+    td_rec = document.getElementById("td-rec-" + i);
     switch (respuestas_[i].impacto_text) {
       case "Leve":
         td_imp.classList = "table-success";
@@ -315,15 +325,19 @@ const cargarColoresTabla = () => {
     switch (respuestas_[i].riesgo_res_text) {
       case "Bajo":
         td_rie.classList = "table-success";
+        td_rec.classList = "table-success";
         break;
       case "Medio":
         td_rie.classList = "table-warning";
+        td_rec.classList = "table-warning";
         break;
       case "Alto":
         td_rie.classList = "table-danger";
+        td_rec.classList = "table-danger";
         break;
       case "Crítico":
         td_rie.style = "background-color:#cf817e;";
+        td_rec.style = "background-color:#cf817e;";
         break;
 
       default:
