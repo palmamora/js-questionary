@@ -64,6 +64,24 @@ const actualizarColorSelect = (n) => {
   }
 };
 
+const actualizarRecomendacion = (n) => {
+  let rec_ = document.getElementById("recomendacion");
+  let rie_ = document.getElementById("riesgo_res");
+
+  if (rie_.selectedIndex === 1) {
+    rec_.innerHTML = `${preguntas_[n].rembajo}`;
+  } else if (rie_.selectedIndex === 2) {
+    rec_.innerHTML = `${preguntas_[n].remmedio}`;
+  } else if (rie_.selectedIndex === 3) {
+    rec_.innerHTML = `${preguntas_[n].remalto}`;
+  } else if (rie_.selectedIndex === 4) {
+    rec_.innerHTML = `${preguntas_[n].remcritico}`;
+  } else if (rie_.selectedIndex === 0) {
+    rec_.innerHTML = '';
+  }
+};
+
+
 const calcularRiesgo = () => {
   let imp_ = document.getElementById("impacto");
   let imp = imp_.options[imp_.selectedIndex].text;
@@ -95,6 +113,7 @@ const calcularRiesgo = () => {
   }
 
   actualizarColorSelect();
+  actualizarRecomendacion(pregunta);
 };
 
 const cargarInformacion = (n) => {
@@ -107,6 +126,7 @@ const cargarInformacion = (n) => {
                     <strong style="font-weight:bold">-Improbable:</strong> ${preguntas_[n].probimpr}<br>
                     <strong style="font-weight:bold">-Posible:</strong> ${preguntas_[n].probposi}<br>
                     <strong style="font-weight:bold">-Probable:</strong> ${preguntas_[n].probprob}<br>`;
+                    
 };
 
 const verificarRespuesta = () => {
@@ -165,6 +185,7 @@ const nextQuestion = () => {
     cargarRespuesta(pregunta);
     cargarInformacion(pregunta);
     actualizarColorSelect();
+    actualizarRecomendacion(pregunta);
     setProgreso(Math.floor((pregunta * 100) / preguntas_.length));
     setPregunta(pregunta);
     if (pregunta !== 0) {
@@ -182,6 +203,7 @@ const prevQuestion = () => {
   cargarRespuesta(pregunta);
   cargarInformacion(pregunta);
   actualizarColorSelect();
+  actualizarRecomendacion(pregunta);
   setProgreso(Math.floor((pregunta * 100) / preguntas_.length));
   setPregunta(pregunta);
   if (pregunta !== 0) {
@@ -455,7 +477,10 @@ const generarPDF = () => {
     .output("datauristring")
     .then(function (pdfAsString) {
       let correo = document.getElementById("email").value;
-      let industria = document.getElementById("select-industrias").options[document.getElementById("select-industrias").selectedIndex].text;
+      let industria =
+        document.getElementById("select-industrias").options[
+          document.getElementById("select-industrias").selectedIndex
+        ].text;
       enviarPDF(pdfAsString, correo, industria);
     });
 };
