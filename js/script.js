@@ -97,17 +97,17 @@ const calcularRiesgo = () => {
   ) {
     riesgo.selectedIndex = 1;
   } else if (
-    (imp === "Catastrófico" && pro === "Improbable") ||
+    (imp === "Significativo" && pro === "Improbable") ||
     (imp === "Moderado" && pro === "Posible") ||
     (imp === "Leve" && pro === "Probable")
   ) {
     riesgo.selectedIndex = 2;
   } else if (
-    (imp === "Catastrófico" && pro === "Posible") ||
+    (imp === "Significativo" && pro === "Posible") ||
     (imp === "Moderado" && pro === "Probable")
   ) {
     riesgo.selectedIndex = 3;
-  } else if (imp === "Catastrófico" && pro === "Probable") {
+  } else if (imp === "Significativo" && pro === "Probable") {
     riesgo.selectedIndex = 4;
   }
 
@@ -120,7 +120,7 @@ const cargarInformacion = (n) => {
   info.innerHTML = `<p style="font-weight:bold">Impacto:</p>
                     <strong style="font-weight:bold">-Leve:</strong> ${preguntas_[n].impactoleve}<br>
                     <strong style="font-weight:bold">-Moderado:</strong> ${preguntas_[n].impactomoderado}<br>
-                    <strong style="font-weight:bold">-Catastrófico:</strong> ${preguntas_[n].impactograve}<br><br>
+                    <strong style="font-weight:bold">-Significativo:</strong> ${preguntas_[n].impactograve}<br><br>
                     <p style="font-weight:bold">Probabilidad:</p>
                     <strong style="font-weight:bold">-Improbable:</strong> ${preguntas_[n].probimpr}<br>
                     <strong style="font-weight:bold">-Posible:</strong> ${preguntas_[n].probposi}<br>
@@ -291,7 +291,7 @@ const cargarColoresTabla = () => {
     td_imp = document.getElementById("td-imp-" + i);
     td_pro = document.getElementById("td-pro-" + i);
     td_rie = document.getElementById("td-rie-" + i);
-    td_rec = document.getElementById("td-rec-" + i);
+    //td_rec = document.getElementById("td-rec-" + i);
     switch (respuestas_[i].impacto_text) {
       case "Leve":
         td_imp.classList = "table-success";
@@ -299,7 +299,7 @@ const cargarColoresTabla = () => {
       case "Moderado":
         td_imp.classList = "table-warning";
         break;
-      case "Catastrófico":
+      case "Significativo":
         td_imp.classList = "table-danger";
         break;
 
@@ -325,19 +325,19 @@ const cargarColoresTabla = () => {
     switch (respuestas_[i].riesgo_res_text) {
       case "Bajo":
         td_rie.classList = "table-success";
-        td_rec.classList = "table-success";
+        //td_rec.classList = "table-success";
         break;
       case "Medio":
         td_rie.classList = "table-warning";
-        td_rec.classList = "table-warning";
+        //td_rec.classList = "table-warning";
         break;
       case "Alto":
         td_rie.classList = "table-danger";
-        td_rec.classList = "table-danger";
+        //td_rec.classList = "table-danger";
         break;
       case "Crítico":
         td_rie.style = "background-color:#cf817e;";
-        td_rec.style = "background-color:#cf817e;";
+        //td_rec.style = "background-color:#cf817e;";
         break;
 
       default:
